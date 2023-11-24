@@ -17,6 +17,50 @@ port = "3306"
 mydatabase = "BASELINE_STMT_STATISTICS"
 mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydatabase}"
 db = SQLDatabase.from_uri(mysql_uri)
+agent_executor = create_sql_agent(
+    llm=OpenAI(temperature=0, openai_api_key="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"),
+    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0, openai_api_key="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")),
+    verbose=True,
+    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+)
+
+# The easy document loader for text
+from langchain.document_loaders import TextLoader
+from langchain.vectorstores import FAISS
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
+loader = TextLoader('padb-domain.txt')
+rec_loader = TextLoader('rules.txt')
+expert_loader = TextLoader('Expert-info.txt')
+index1_loader = TextLoader('Index-training-1.txt')
+index2_loader = TextLoader('Index-training-2.txt')
+index3_loader = TextLoader('Index-training-3.txt')
+index4_loader = TextLoader('Index-training-4.txt')
+explain_loader = TextLoader('explain.txt')
+whatif_loader = TextLoader('whatif.txt')
+doc = loader.load()
+rec_doc = rec_loader.load()
+expert_doc = expert_loader.load()
+index1_doc = index1_loader.load()
+index2_doc = index2_loader.load()
+index3_doc = index3_loader.load()
+index4_doc = index4_loader.load()
+explain_doc = explain_loader.load()
+whatif_doc = whatif_loader.load()
+print (f"You have {len(doc)} document")
+print (f"You have {len(doc[0].page_content)} characters in that document")
+print (f"You have {len(rec_doc)} document")
+print (f"You have {len(rec_doc[0].page_content)} characters in that document")
+print (f"You have {len(expert_doc)} document")
+print (f"You have {len(expert_doc[0].page_content)} characters in that document")
+print (f"You have {len(index1_doc)} document")
+print (f"You have {len(index1_doc[0].page_content)} characters in that document")
+print (f"You have {len(index2_doc)} document")
+print (f"You have {len(index2_doc[0].page_content)} characters in that document")
+print (f"You have {len(index3_doc)} document")
+print (f"You have {len(index3_doc[0].page_content)} characters in that document")
+print (f"You have {len(index4_doc)} document")
+print (f"You have {len(index4_doc[0].page_content)} characters in that document")
 
 # App title
 st.set_page_config(page_title="🤗💬 HugChat")
