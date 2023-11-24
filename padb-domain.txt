@@ -1,0 +1,778 @@
+  PACOLMNS is used by the PADB Starter Set dialog.  The description
+  is limited to 47 bytes on panel DOMEPAD6 in the dialog.
+
+  Column                         Description
+L ABASIS                         Historical basis for alert
+L ACTION                         Recommended stats action: WAIT, REVIEW, UPDATE
+L ADVICE                         0 if threshold not exceeded; 1 if exceeded
+L AEXECS                         Statement or cursor executions for alert
+L AHASH                          SQL text hash id for alert
+L APPLGROUP                      Application group determined by APPTUNE profile
+L APPLGRP                        Application grouping
+L APPLNAME                       Reserved for future use
+L ASREADIO                       Asynchronous read I/O wait time (QWACAWTR)
+L ASWRITIO                       Asynchronous write I/O wait time (QWACAWTW)
+L ASYNCPCT                       Change in async pages/syncio ratio since REORG
+L ASYNCPCTEXC                    1=change in async pages/syncio > threshold
+L ASYNCPCTTHR                    Threshold for async pages/syncio change as pct
+L ASYNCPGS                       Pages read asynchronously
+L ASYNCRED                       Pages read by async
+L ASYNCREQ                       Asynchronous requests
+L ASYNCSYNCEXC                   1=Asynch page/syncio ratio near REORG>threshold
+L ASYNCSYNCRATIO                 Asynchronous pages/syncios near REORG
+L ASYNCSYNCREND                  Asynchronous pages/syncios at latest time
+L ASYNCSYNCTHR                   Threshold for async pages/syncio ratio
+L ATHRSHLD                       Threshold for alert (basis + percentage)
+L ATPRE                          SQL text preview for alert
+L AUTHID                         Authorization ID
+L AVALUE                         Extracted value for alert
+L AVERAGE                        Exception history tracking, 1 indicates average
+L AVGGPPCT                       Percentage incr in avg getpage time since REORG
+L BEGIN_ASYNCIO                  Asynchronous I/Os near last REORG time
+L BEGIN_ASYNCPG                  Asynchronous pages read near last REORG time
+L BEGIN_AVGGETPGTIME             Average getpage time near last REORG time
+L BEGIN_AVGSYNCIOTIME            Average time for sync I/O near last REORG time
+L BEGIN_GETPAGES                 Getpage request count near last REORG time
+L BEGIN_GPPERSIO                 Getpage requests per sync I/O near last REORG
+L BEGIN_PCTSEQ                   Pct of getpage reqs that were sequentl (REORG)
+L BEGIN_PERF                     The timestamp of the perf data near last REORG
+L BEGIN_STATS                    The timestamp of statistical data near REORG
+L BEGIN_SYNCIO                   Sychronous I/O count near last REORG time
+L BIND_CDATA                     CURRENTDATA bind option value
+L BIND_CHOLD                     WITH HOLD attribute of the PREPARE
+L BIND_DEGRE                     CURRENT DEGREE special register value
+L BIND_DYNR                      DYNAMICRULES bind option value
+L BIND_ISO                       ISOLATION bind option value
+L BIND_PREC                      CURRENT PRECISION special register value
+L BIND_SQLRL                     CURRENT RULES special register value
+L BINDX_NLEAF                    Beginning number of index leaf nodes
+L BINDX_REORGLEAFFAR             Beginning number of far index leaf pages
+L BINDX_REORGLEAFNEAR            Beginning number of near index leaf pages
+L BINDX_TOTALENTRIES             Beginning number of entries in the index space
+L BMCID                          Report identifier
+L BPID                           Buffer pool ID
+L BPNAME                         Buffer pool name
+L BTABL_FARINDREF                Beginning number of overflow rows far from ptr
+L BTABL_NEARINDREF               Beginning number of overflow rows near to ptr
+L BTABL_REORGINSERTS             Beginning number of inserts since REORG
+L BTABL_REORGUNCLUSTINS          Beginning nbr unclustered inserts since REORG
+L BTABL_TOTALROWS                Beginning number of tablespace rows
+L BYPASSED                       Efficiency filtering - bypassed executions
+L CACHEHITS                      Number of read I/O disk cache hits
+L CALLDESC                       Type of SQL statement being counted in history
+L CALLLVL                        SQL nested level of exception
+L CALLS                          Number of SQL calls, or Ex Adv hist left value
+L CALLS2                         Exception Adv. history correlation/right value
+L CALLTYPE                       "STATIC" or "DYNAMIC"
+L CARDF                          Distinct value count from catalog statistics
+L CLNTAC                         Client accounting string
+L CLNTAP                         Client application
+L CLNTCT                         Client correlation token
+L CLNTUS                         Client user name
+L CLNTWS                         Client work station
+L COLLID                         Collection ID or "<DYNAMIC>"
+L COLNAME                        Column name for runstats candidate
+L COLSEQ                         Numeric position of a column in the index
+L COMPLFLAG                      1=Exception Advisor ran to completion
+L CONNECT                        Db2 to which Exception Advisor connected
+L CONNID                         Connection ID
+L CONNTYPE                       Connection type
+L CONTOKEN                       Consistency token
+L COPYCHANGES                    RTS insert, update, delete count since COPY
+L COPYLASTTIME                   RTS timestamp of last full image copy
+L COPYUPDATEDPAGES               RTS distinct pages updated since image copy
+L COPYUPDATELRSN                 RTS LRSN or RBA of first update after copy
+L COPYUPDATETIME                 RTS timestamp of first update after copy
+L CORRID                         Correlation ID
+L COUNT                          Number of exceptions for Exception Advisor
+L CPU                            CPU observed for Performance Advisory
+L CPURANK                        Ranking of CPU compared to other stmts in wkld
+L CPUSHARE                       Share of CPU consumed amongst all stmts in wkld
+L CPUTIME                        CPU time in SQL (includes zIIP)
+L CREATOR                        Object creator
+L DATASIZE                       Total number of bytes that row data occupies
+L DBID                           Database ID
+L DBNAME                         Database name
+L DACCUM                         Defined alert accumulation T=Total A=Average
+L DBASELIN                       Defined disruption alert baseline
+L DB2                            Db2 subsystem or group where alert occurred
+L DB2TYPE                        S=subsystem G=group
+L DCLSTNO                        Associated declare statement #
+L DCRIT                          Defined alert criteria C=CPU E=Elapsed
+L DDAYS                          Defined alert days back
+L DDURATN                        Defined degradation alert duration
+L DELETECT                       Access count for delete
+L DESCRIPTION                    Column description
+L DETAIL                         Exception Advisor level 0=Summary 1=Detail
+L DISORGANIZED                   Reorg candidate physically disorganized (Y/N)
+L DNAME                          Name of defined alert
+L DPCTTHRS                       Defined alert threshold percentage
+L DRIVETYPE                      HDD=Hard Disk Drive  SSD=Solid State Drive
+L DSNAME                         Dataset name
+L DTYPE                          Alert type: SPIke, DISruption, DEGradation
+L DYNPRE                         Dynamic prefetch requests
+L ELAPSED                        Elapsed time of the exceptional execution
+L ELAPTIME                       Elapsed in SQL time
+L END_ASYNCIO                    Asynchronous I/Os in most recent interval
+L END_ASYNCPG                    Asynchronous pages read most recent interval
+L END_AVGGETPGTIME               Average getpage time in most recent interval
+L END_AVGSYNCIOTIME              Average time for sync I/O in most recent intvl
+L END_GETPAGES                   Getpage request count in most recent interval
+L END_GPPERSIO                   Getpage requests per sync I/O recent interval
+L END_PCTSEQ                     Pct of getpage reqs that were sequentl (recent)
+L END_PERF                       The timestamp of recent interval for perf data
+L END_STATS                      The timestamp of recent interval for statistics
+L END_SYNCIO                     Sychronous I/O count near last REORG time
+L ENTSEQ                         Identifies the history point in Exception Adv
+L ERD1                           RDS return code for error
+L ERD2                           DBSS return code for error
+L ERD3                           UID row count for error
+L ERD4                           Relative cost for error
+L ERD5                           Position of error
+L ERD6                           Internal error code
+L ERRL                           Error message parm length
+L ERRM                           Message parameters
+L ERRORCNT                       Error count
+L ERRP                           Routine detecting error
+L ERRTEXT                        Error text, lines delimited by semicolons
+L EVNTSEQ                        Identifies the exception event in advisor
+L EVNTSTCK                       Event time (in STCK format)
+L EVNTTAB                        Name of event table for Exception Advisor run
+L EVNTTIME                       Event time
+L EXCPCNT                        Exception count
+L EXCPREAS                       Exception reason
+L EXCPTTAB                       Name of exception table for Exception Adv run
+L EXCPTHR1                       Exception threshold value (time)
+L EXCPTHR2                       Exception threshold value (count)
+L EXCPTYPE                       Exception type (0=event, 1=time, 2=count)
+L EXCPVAL1                       Exception value (time)
+L EXCPVAL2                       Exception value (count)
+L EXECS                          Number of executions for statement
+L EXPLAIN_TIME                   Timestamp at which explain was performed
+L EXTENTS                        Number of extents in the tablespace
+L FAILGETP                       Unsuccessful getpage requests
+L FETCHCT                        Access count for fetch
+L FRSTTIME                       Start time for exceptions analyzed by advisor
+L FUNCTION_LEVEL                 Db2 function level
+L GETPAGES                       Getpage requests (QBACGET)
+L GETPAGET                       Accumulated time for getpages
+L GETPLOB                        Getpages for LOB pages
+L GPPERSIOEXC                    Whether getpages/syncio thresh exceeded (1=Yes)
+L GPPERSIOPCT                    Getpages per syncio percentage decrease
+L GPPERSIOTHR                    Threshold for getpages/syncio percentage decr
+L GPSHARE                        Share of getpages as percentage of workload
+L GROUP_MEMBER                   Data sharing member name that performed EXPLAIN
+L HASHLASTUSED                   Date when hash access last used for search/RI
+L HCOLGROUP1                     Character representation of hex column set
+L HCOLGROUP2                     Character rep of hex column set (overflow)
+L HENTTAB                        Historical entry table for Exception Adv run
+L HICPU                          Highest in SQL CPU time for one exec(incl zIIP)
+L HIELAPSD                       Highest in SQL elapsed time for one execution
+L HIGETPAG                       Highest getpage count for a single execution
+L HIREADIO                       Highest synchronous read I/Os for one execution
+L HISTTAB                        Historical title table for Exception Adv run
+L HEXECS                         SQL executions (OPENs for cursor)
+L HTIME                          Comparison interval start time
+L HTYPE                          H=History C=Current D=Disrupt baseline
+L HVALUE                         Value for the reported time/type
+L HVTAB                          Host variable value table for Exception Adv run
+L IMPLQUAL                       Implicit qualifier (object)
+L INDEX_AVGGPEXC                 Whether idx time incr thresh exceeded (1=Yes)
+L INDEX_AVGGPTHR                 Threshold for index time increase
+L INDEX_FARLEAFEXC               Whether idx far leaf thresh exceeded (1=Yes)
+L INDEX_FARLEAFPCT               Index far leaf splits as pct of total pages
+L INDEX_FARLEAFTHR               Threshold for index far leaf percentage
+L INDEX_NLEAF                    Number of leaf pages for index
+L INDEX_REORGLEAFFAR             Number of leaf pages relocated far since REORG
+L INDEX_REORGLEAFNEAR            Number of leaf pages relocated near since REORG
+L INDEX_TOTALENTRIES             Number of entries in the index
+L INDEXSPACE                     Name of the index space
+L INSERTCT                       Access count for insert
+L INSTANCE                       Instance of the table or index space
+L INTVSTOP                       Workload interval stop time (max)
+L INTVTIME                       Workload interval start time (min)
+L ISOBID                         Index space object ID
+L IXCREATOR                      Index creator
+L IXNAME                         Index name
+L LACCELSN                       Long accelerator server name
+L LASTDATACHANGE                 Last time stats represented by this row updated
+L LASTTIME                       Stop time for exceptions analyzed by advisor
+L LASTUSED                       Date when index last used for search/RI
+L LCLNTAC                        Long client accounting string
+L LCLNTAP                        Long client application
+L LCLNTCT                        Long client correlation token
+L LCLNTUS                        Long client user name
+L LCLNTWS                        Long client work station
+L LCOLLID                        Long collection ID
+L LDB2NAME                       Logical Db2 name
+L LEVEL                          Interval type, time; or XCPT w/time for excptn
+L LISTPRE                        List prefetch requests
+L LOADRLASTTIME                  When LOAD REPLACE last ran for space/partition
+L LOBJNAME                       Long object name
+L LOCOLLID                       Long collection ID
+L LOCPU                          Lowest in SQL CPU time for one exec(incl zIIP)
+L LOELAPSD                       Lowest in SQL elapsed time for one execution
+L LOGETPAG                       Lowest getpage count for a single execution
+L LOREADIO                       Lowest synchronous read I/Os for one execution
+L LORLOK                         Long requesting location
+L LPFACILITY                     Whether the disk CU has High Perf List Prefetch
+L LPROGRAM                       Long program name
+L LTABOBJN                       Associated table long object name
+L MAXPART                        Maximum number of partitions
+L MODE                           A=Advanced S=Standard
+L MONITORED                      Efficiency filtering - monitored executions
+L NACTIVE                        Number of active pages in space or partition
+L NAME                           Name of the rule, space, or column
+L NAME1                          Exception Adv. history correlation/left label
+L NAME2                          Exception Adv. history correlation/right label
+L NDB2CPU                        In-Db2 CPU time
+L NDB2ELA                        In-Db2 elapsed time
+L NDB2ZIIP                       In-Db2 zIIP time
+L NEVER_ORGANIZED                Y=Space or part never reorged for analysis hist
+L NEVER_ORGANIZED_CANDIDATE      Y=Reorg candidate that was never reorged
+L NLEAF                          Number of leaf pages in the index
+L NLEVELS                        Number of levels in the index tree
+L NPAGES                         Number of index pages w/pseudo-del entries only
+L NUMCOLUMNS                     Number of columns in the column group
+L OBID                           Object ID
+L OBJTAB                         Object stats table for Exception Advisor run
+L OBJTYPE                        T=Tablespace I=Indexspace
+L OBNAME                         Object name
+L OBTYPE                         Object type
+L OPERATOR                       Comparison operator for exception advisor rule
+L PART                           Partition number of object evaluated for reorg
+L PARTITION                      Partition number of table or index space
+L PARTITN                        Object partition
+L PER_STMT_ID                    Persistent statement ID
+L PERCENT1                       Exception Adv. history correlation/left number
+L PERCENT2                       Exception Adv. history correlation/right number
+L PERFTIME                       Timestamp when performance stats extracted
+L PLAN                           Plan name
+L PRATIO                         Actual vs. expected performance as a ratio
+L PREVRUN                        Previous recommendation for runstats update
+L PROGNAME                       Name of package, procedure, trigger, UDF
+L PROGRAM                        DBRM/package ID
+L PROGRAM_NAME                   Program/package name
+L PROGTYPE                       Program type
+L PSID                           Pageset ID
+L PSNAME                         Pageset name
+L QBACDPF                        Number of dynamic prefetch requests
+L QBACIMW                        Number of synchronous write I/Os
+L QBACIOC                        Number of read I/O disk cache hits
+L QBACLPF                        Number of list prefetch requests
+L QBACNGT                        Number of failed conditional getpages
+L QBACRIO                        Number of synchronous read I/Os
+L QBACSEQ                        Number of seq prefetch read requests
+L QBACSIO                        Number of pages read async by agent
+L QBACSWS                        Number of buff upds:system pages
+L QBACSYI                        Number of sync reads using zHYPERLINK process
+L QBACSYIT                       CPU time by sync reads using zHYPERLINK process
+L QSTAERRS                       SQL code at time of exception, or error count
+L QTXACHG                        Number of change requests
+L QTXACHUS                       RLF highest CPU used (16 mics)
+L QTXACLMT                       RLF limit in CPU (16 mics)
+L QTXACLNO                       Number of claim requests
+L QTXACLUN                       Number of failed claim requests
+L QTXADEA                        Number of deadlocks
+L QTXADRNO                       Number of drain requests
+L QTXADRUN                       Number of failed drain requests
+L QTXAIRLM                       Number of other IRLM requests
+L QTXALES                        Number of lock escalations to share
+L QTXALEX                        Number of lock escalations to exclusive
+L QTXALOCK                       Number of lock requests
+L QTXANPL                        Max number of page locks held
+L QTXAPREC                       How RLF limit was determined
+L QTXAQRY                        Number of query requests
+L QTXARLID                       Resource limit table ID
+L QTXASLAT                       Number of suspend-latch conflict
+L QTXASLMT                       RLF limit in service units (asutime)
+L QTXASLOC                       Number of suspends (lock conflicts)
+L QTXASOTH                       Number of suspend-other conflict
+L QTXATIM                        Number of timeouts
+L QTXAUNLK                       Number of unlock requests
+L QUERY_HASH                     Query hash key
+L QUERY_HASH_VERSION             Version of the query hash
+L QUERYNO                        Statement number
+L QWAC_AT_COUNT                  Number of autonomous transactions
+L QWAC_AT_WAIT                   Wait time for autonomous transactions
+L QWAC_PQS_COUNT                 Number of waits for parallel queries to sync
+L QWAC_PQS_WAIT                  Wait time for parallel queries to synchronize
+L QWACAACC                       Number of accelerator wait trace events
+L QWACAACW                       Accelerator wait time
+L QWACABRT                       Number of abort requests
+L QWACAECP                       Accelerator eligible CPU time
+L QWACAEEL                       Accelerator eligible elapsed time
+L QWACAESE                       Accelerator eligible Spec Eng time
+L QWACAIEL                       SQL Data Insights elapsed time
+L QWACAICP                       SQL Data Insights CPU time
+L QWACAIZI                       SQL Data Insights zIIP time
+L QWACAICT                       SQL Data Insights entry/exit events
+L QWACALBC                       Number of TCP/IP LOB/XML materialization events
+L QWACALBW                       TCP/IP LOB/XML materialization wait time
+L QWACALCT                       Number of archlog wait trace events
+L QWACALOG                       Archive log wait time
+L QWACANAR                       Number of archive read wait trc evt
+L QWACARLG                       Number of log write wait trace event
+L QWACARNA                       Number of Db2 entry/exits events
+L QWACARNC                       Number of claim release wait trc evt
+L QWACARND                       Number of drain lock wait trc evt
+L QWACARNE                       Number of I/O wait trace events
+L QWACARNG                       Number of sending messages trace events
+L QWACARNH                       Number of page latch wait trc evt
+L QWACARNJ                       Number of waits for global parent L-locks
+L QWACARNK                       Number of waits for child L-locks
+L QWACARNL                       Number of lock/latch wait trc events
+L QWACARNM                       Number of waits for other L-locks
+L QWACARNN                       Number of waits for pageset P-locks
+L QWACARNO                       Number of waits for page P-locks
+L QWACARNQ                       Number of waits for other P-locks
+L QWACARNR                       Number of other read wait trc event
+L QWACARNS                       Number of sync EU switch wait trc evt
+L QWACARNW                       Number of other write wait trc event
+L QWACAWAR                       Tape archive read wait time
+L QWACAWCL                       Claim release wait time
+L QWACAWDR                       Drain lock wait time
+L QWACAWLG                       Log write wait
+L QWACAWTE                       Db2 sync EU switch wait time
+L QWACAWTG                       Send wait time to other Db2s
+L QWACAWTJ                       Global contention wait time
+L QWACAWTK                       Accum wait time for child L-locks
+L QWACAWTL                       Lock/latch wait time
+L QWACAWTM                       Accum wait time for other L-locks
+L QWACAWTN                       Accum wait time for pageset P-locks
+L QWACAWTO                       Accum wait time for global page P-locks
+L QWACAWTP                       Page latch wait time
+L QWACAWTQ                       Accum wait time for other P-locks
+L QWACCANM                       Number of waits for stored procedure TCB
+L QWACCAST                       Stored procedure wait time for TCB
+L QWACCOMM                       Number of phase 2 commit requests
+L QWACLRN                        Log records written
+L QWACPCNT                       Number of parallel child tasks
+L QWACPECT                       Accum TCB time before the enclave is created
+L QWACRBSV                       Number of rollback to savepoint requests
+L QWACRLSV                       Number of release savepoint reqs
+L QWACSPCP                       Accum TCB time on stored procedure requests
+L QWACSPEA                       Stored procedure elapsed time
+L QWACSPEB                       Stored procedure elapsed time in SQL
+L QWACSPNE                       Number of stored procedure entry/exit events
+L QWACSPTT                       Accum TCB time on stored procedure CALL stmts
+L QWACSVPT                       Number of savepoint requests
+L QWACTREE                       Accum enclave trig elapsed time
+L QWACTRET                       Accum non enclave trig elapsed
+L QWACTRTE                       Accum enclave trig TCB time
+L QWACTRTT                       Accum non enclave trig TCB time
+L QWACUDCP                       Accum user def function TCB time
+L QWACUDEA                       Elapsed time in user def funcs
+L QWACUDEB                       UDF elapsed time executing SQL
+L QWACUDNE                       Number of SQL events by user def fun
+L QWACUDST                       UDF elapsed time
+L QWACUDTT                       Accum user def function SQL time
+L QWACWFCU                       Current workfile blocks used by this agent
+L QWACWFMX                       Maximum workfile blocks used by this agent
+L QWACZCL1                       Accum CPU time on zIIP processor
+L QWACZCL2                       Accum Db2 CPU time on zIIP processor
+L QWACZELG                       Accum zIIP CPU time on standard CP
+L QWACZSPC                       Accum non-zIIP CPU on stored procedure
+L QWACZSPE                       Accum elapsed time on stored procedure
+L QWACZSPN                       Accum zIIP CPU time on stored procedure
+L QWACZTRT                       Accum tigger CPU time on zIIP processor
+L QWAXALCT                       Number of archlog wait trace events
+L QWAXALOG                       Archlog wait time
+L QWAXANAR                       Number of archive read wait trc evt
+L QWAXARNC                       Number of claim release wait trc evt
+L QWAXAWAR                       Tape archive read wait time
+L QWAXAWCL                       Claim release wait time
+L QWAXAWDR                       Drain lock wait time
+L QWAXAWFC                       Write phase 1 wait time
+L QWAXDSNS                       Number of waits for EU switch to dataspace mgr
+L QWAXDSSE                       Accum wait time for EU switch to dataspace mgr
+L QWAXFCCT                       Number of waits for force at commit
+L QWAXIXLE                       # waits for async ixlcache/ixlfcomp invocations
+L QWAXIXLT                       Accum wait for async ixlcache/ixlfcomp invocate
+L QWAXLOBC                       Number of LOB compression wait trace events
+L QWAXLOBW                       Accum wait time for LOB compression
+L QWAXOCNS                       Number of waits for EU switch to open/close svc
+L QWAXOCSE                       Accum wait time for EU switch to open/close svc
+L QWAXOTNS                       Number of waits for EU switch to other services
+L QWAXOTSE                       Accum wait time for EU switch to other services
+L QWAXPIPW                       Pipe accum wait time
+L QWAXPIWC                       Pipe wait trace events
+L QWAXSLNS                       Number of waits for EU switch to SYSLGRNG svcs
+L QWAXSLSE                       Accum wait time for EU switch to SYSLGRNG svcs
+L QWHADSGN                       Data sharing group
+L QWHAMEMN                       Data sharing group member
+L QWHSRN                         Db2 release
+L QWHSSSID                       Db2 SSID
+L QXALDAB                        Number of alter database stmts
+L QXALOCC                        Number of allocate cursor stmts
+L QXALOCL                        Number of associate locator stmts
+L QXALPRO                        Number of alter procedure stmts
+L QXALTCTX                       Number of alter trusted context stmts
+L QXALTIX                        Number of alter index stmts
+L QXALTJR                        Number of alter jar stmts
+L QXALTMP                        Number of alter mask or alter permission stmts
+L QXALTSEQ                       Number of alter sequence stmts
+L QXALTST                        Number of alter stogroup stmts
+L QXALTTA                        Number of alter table stmts
+L QXALTTS                        Number of alter tablespace stmts
+L QXALTVW                        Number of alter view stmts
+L QXALUDF                        Number of alter function stmts
+L QXARREXP                       Number of array var expands beyond 32k bytes
+L QXCALL                         Number of SQL call
+L QXCALLAB                       Number of stored procedure abends
+L QXCALLRJ                       Number of stored procedure rejections
+L QXCALLTO                       Number of stored procedure timeouts
+L QXCASCDP                       Max level of nested SQL cascade
+L QXCAUD                         Number of user defined functions executed
+L QXCAUDAB                       Number of user defined functions abended
+L QXCAUDRJ                       Number of user defined functions rejections
+L QXCAUDTO                       Number of user defined functions time outs
+L QXCDIST                        Number of create distinct type stmts
+L QXCLOSE                        Number of close stmts
+L QXCMTON                        Number of comment on stmts
+L QXCON1                         Number of connect type 1 stmts
+L QXCON2                         Number of connect type 2 stmts
+L QXCOORNO                       Number of parallel grps executed on single Db2
+L QXCRALS                        Number of create alias stmts
+L QXCRATB                        Number of create aux table stmts
+L QXCRCTX                        Number of create trusted context stmts
+L QXCRDAB                        Number of create database stmts
+L QXCREMP                        Number of create mask or create permission stmt
+L QXCRESEQ                       Number of create sequence stmts
+L QXCRGTT                        Number of create global temp table stmts
+L QXCRINX                        Number of create index stmts
+L QXCRPRO                        Number of create procedure stmts
+L QXCRROL                        Number of create role stmts
+L QXCRSTG                        Number of create stogroup stmts
+L QXCRSYN                        Number of create synonym stmts
+L QXCRTAB                        Number of create table stmts
+L QXCRTSV                        Number of create variable statements
+L QXCRUDF                        Number of create function stmts
+L QXCTABS                        Number of create tablespace stmts
+L QXCTRIG                        Number of create trigger stmts
+L QXDCLGTT                       Number of declare global temp table
+L QXDDIST                        Number of drop distinct type stmts
+L QXDEFVU                        Number of create view stmts
+L QXDEGAT                        Number of parallel groups chg to seq/auton proc
+L QXDEGBUF                       Number of parallel exec seq: no buffer
+L QXDEGCUR                       Number of parallel exec seq: update cursor
+L QXDEGDTT                       Number of parallel grp using UDF and on one Db2
+L QXDEGENC                       Number of parallel grp in seq
+L QXDEGESA                       Number of parallel exec seq: esa sort
+L QXDELET                        Number of delete stmts
+L QXDESC                         Number of describe stmts
+L QXDROSEQ                       Number of drop sequence stmts
+L QXDRPAL                        Number of drop alias stmts
+L QXDRPCTX                       Number of drop trusted context stmts
+L QXDRPDB                        Number of drop database stmts
+L QXDRPFN                        Number of drop user def func stmts
+L QXDRPIX                        Number of drop index stmts
+L QXDRPMP                        Number of drop mask or drop permision stmts
+L QXDRPPKG                       Number of drop package stmts
+L QXDRPPR                        Number of drop procedure stmts
+L QXDRPROL                       Number of drop role stmts
+L QXDRPST                        Number of drop stogroup stmts
+L QXDRPSV                        Number of drop variable statements
+L QXDRPSY                        Number of drop synonym stmts
+L QXDRPTA                        Number of drop table stmts
+L QXDRPTR                        Number of drop trigger stmts
+L QXDRPTS                        Number of drop tablespace stmts
+L QXDRPVU                        Number of drop view stmts
+L QXDSCRTB                       Number of describe table stmts
+L QXFETCH                        Number of fetch stmts
+L QXFREEL                        Number of free locator stmts
+L QXGRANT                        Number of grant stmts
+L QXHJINCS                       Number RID list appends-hybrid join nterupt/stg
+L QXHJINCT                       Number RID list appends-hybrid join nterupt/lim
+L QXHOLDL                        Number of hold locator stmts
+L QXINCRB                        Number of incremental binds
+L QXINSRT                        Number of insert stmts
+L QXISORR                        Number of parallel grps on single Db2
+L QXLABON                        Number of label on stmts
+L QXLOCK                         Number of lock table stmts
+L QXMAXDEG                       Max degree query parallelism
+L QXMAXEST                       Estimated maximum degree parallelism/bind time
+L QXMAXPLA                       Planned maximum degree parallelism/exec time
+L QXMERGE                        Number of merge stmts
+L QXMIAP                         Number of RID list proc used
+L QXMLSFND                       Number of prepares using Db2ZAI stabilized stmt
+L QXMLSRT                        Number of times Db2ZAI feedback was used
+L QXMRMIAP                       Number of RID list not used-max lmt
+L QXNORGRP                       Number of parallel=opt:enough buffer
+L QXNSMIAP                       Number of RID list not used-no stg
+L QXOPEN                         Number of open stmts
+L QXPAROPT                       Number of parallel grps chgd to seq/optimizer
+L QXPREP                         Number of prepare stmts
+L QXPRRESI                       Number of prepares w/ use of index restricted
+L QXREDGRP                       Number of parallel<opt:no buffer
+L QXREFTBL                       # of refresh table statements
+L QXREL                          Number of release stmts
+L QXREPOP1                       Number of parallel grp due to sysple
+L QXREPOP2                       Number of parallel grp due to buffer
+L QXREVOK                        Number of revoke stmts
+L QXRFMIAP                       # of times RID List processing was not used
+L QXRLFDPA                       Parallelism disabled by RLF?
+L QXRNIX                         Number of rename index stmts
+L QXRNTAB                        Number of rename table stmts
+L QXROIIDX                       Number of direct row access to use index
+L QXROIMAT                       Number of successful direct row access
+L QXROITS                        Number of direct row access to scan
+L QXROWTRG                       Number of row triggers activated
+L QXRSDMAD                       # of times DM skipped for RID list retrieval
+L QXRSMIAP                       Number of times RID list retrieval MI accs skip
+L QXRWSDEL                       Number of rows deleted
+L QXRWSFCH                       Number of rows fetched
+L QXRWSINS                       Number of rows inserted
+L QXRWSINSRTDALG1                Number of times basic insert algoritm used
+L QXRWSINSRTDALG2                Number of times fast insert algorithm used
+L QXRWSUPD                       Number of rows updated
+L QXR1BOAD                       # of times only 1 block was fetched
+L QXSELECT                       Number of select stmts
+L QXSETCDG                       Number of set current degree stmts
+L QXSETCON                       Number of set connection stmts
+L QXSETCPR                       Number of set current precision stmt
+L QXSETCRL                       Number of set current rules stmts
+L QXSETHV                        Number of set host variable stmts
+L QXSETPTH                       Number of set current path stmts
+L QXSETSQL                       Number of set current SQLID stmts
+L QXSISTOR                       # times that a sparse index disabled/storage
+L QXSIWF                         # times that a sparse ix built a phys work file
+L QXSTCWLD                       # times a dup DSC entry created/lits ineligible
+L QXSTCWLM                       # times a matching stmt was found/concentrate
+L QXSTCWLP                       # times dynamic stmts were parsed to concentrat
+L QXSTCWLR                       # times at least one lit was replced/concentrat
+L QXSTDEXP                       Number of cached stmts discard
+L QXSTDINV                       Number of cached stmts purged
+L QXSTFND                        Number of prepares that used cache
+L QXSTIPRP                       # prepares keepdynamic(yes) done - no valid cpy
+L QXSTLOBV                       Max storage used for LOB value
+L QXSTNFND                       Number of prepares that did not use
+L QXSTNPRP                       # prepares keepdynamic(yes) not done-valid copy
+L QXSTODGN                       # times parallelism changed to seq/rsrce constr
+L QXSTORED                       # times parallelism reduced/sys rsrce constrant
+L QXSTREOP                       Number of times reoptimization occur
+L QXSTSFND                       # prepares satisfied from SYSIBM.SYSDYNQRY copy
+L QXSTSRT                        # RDS sorts
+L QXSTSRTL                       # RDS sorts using Integrated Accel for Z Sort
+L QXSTTRG                        Number of statement triggers activat
+L QXSTXMLV                       Number of times max storage used - XML
+L QXTOTGRP                       Number of parallel groups executed
+L QXTRGERR                       Number of triggers with SQL error
+L QXTRNOWN                       # of transfer ownership statements
+L QXTRTBL                        Number of truncate table stmts
+L QXUPDTE                        Number of update stmts
+L QXWFRIDS                       Number of times RID list overflown - storage
+L QXWFRIDT                       Number of times RID list overflown - limits
+L QXXCBPNX                       Number of parallel grps to run in ds
+L QXXCSKIP                       Number of Db2 members skipped-BP strg shortage
+L Q307TCOR                       True correlation ID
+L Q8ACACPU                       Accumulated accelerator CPU time
+L Q8ACAELA                       Accumulated accelerator elapsed time
+L Q8ACAWAT                       Accumulated accelerator wait time
+L Q8ACBLKR                       # of blocks returned
+L Q8ACBLKS                       # of blocks sent
+L Q8ACBYTR                       # of bytes returned
+L Q8ACBYTS                       # of bytes sent
+L Q8ACCMTC                       # of commit statements sent to IDAA from Db2
+L Q8ACCONN                       # of accelerator connects
+L Q8ACCRTC                       # of create statements sent to IDAA from Db2
+L Q8ACDELC                       # of delete statements sent to IDAA from Db2
+L Q8ACDRPC                       # of drop statements sent to IDAA from Db2
+L Q8ACFAIL                       # of failed requests
+L Q8ACINSC                       # of insert statements sent to IDAA from Db2
+L Q8ACMSGR                       # of messages returned
+L Q8ACMSGS                       # of messages sent
+L Q8ACOPNC                       # of open statements sent to IDAA from Db2
+L Q8ACPRID                       Accelerator product ID
+L Q8ACRBKC                       # of rollback statements sent to IDAA from Db2
+L Q8ACREQ                        # of accelerator requests
+L Q8ACROWC                       # of rows returned by IDAA to Db2
+L Q8ACROWD                       # of rows deleted on IDAA by Db2
+L Q8ACROWI                       # of rows inserted on IDAA by Db2
+L Q8ACROWR                       # of rows returned from IDAA to Db2
+L Q8ACROWS                       # of rows sent to IDAA by Db2
+L Q8ACROWU                       # of rows updated on IDAA by Db2
+L Q8ACSCPU                       Acceleretor services CPU time
+L Q8ACSELA                       Accelerator services elpased time
+L Q8ACTCPU                       Accelerator svcs TCP/IP CPU time
+L Q8ACTELA                       Accelerator svcs TCP/IP elapsed time
+L Q8ACTOUT                       # of timed out requests
+L Q8ACUPDC                       # of update statements sent to IDAA from Db2
+L RANDOM                         Random getpage requests
+L REASON                         Reason for exception or runstats recommendation
+L REBUILDLASTTIME                Last time that the rebuild utility ran on space
+L REORG_CANDIDATE                Whether this obj is recommended for reorg (Y/N)
+L REORGAPPENDINSERT              Index entries with key>max key value inserted
+L REORGCLUSTERSENS               Times data read w/SQL that is cluster-sensitive
+L REORGDELETES                   Rows, LOBs, or idx entries deleted since REORG
+L REORGDISORGLOB                 Imperfectly chunked LOBs inserted since REORG
+L REORGFARINDREF                 Overflow rows relocated far from pointer record
+L REORGHASHACCESS                Data accesses using hash for search/RI
+L REORGINDEXACCESS               Data accesses using index for search/RI
+L REORGINSERTS                   Rows, LOBs, or idx entries inserted since REORG
+L REORGLASTTIME                  The last time for REORG, or time of creation
+L REORGLEAFFAR                   Net number of leaf pages located far from prev
+L REORGLEAFNEAR                  Net number of leaf pages located near from prev
+L REORGMASSDELETE                Mass deletes or dropped tables from segmented
+L REORGNEARINDREF                Overflow rows relocated near from ptr record
+L REORGNUMLEVELS                 Index levels removed or added since REORG
+L REORGPSEUDODELETES             Pseudo-deleted index entries since REORG
+L REORGSCANACCESS                Data accesses for search/RI since REORG
+L REORGUNCLUSTINS                Rows inserted out of cluster order since REORG
+L REORGUPDATES                   Rows updated since REORG
+L RLOC                           Requesting location
+L RLOK                           Requesting location
+L RSDLCLID                       Residual collection ID
+L RSDLCOTK                       Residual consistency token
+L RTSCARDF                       Distinct value count from real-time statistics
+L RULENAME                       Name of the rule in Exception Advisor
+L RULESEQ                        Identifies the rule in Exception Advisor
+L RULESTAB                       Rules table for Exception Adv run
+L RUNTIME                        Timestamp when Exception Advisor ran
+L SCHEMA                         Table qualifier for the statement
+L SECTNO                         Section number
+L SECTNOI                        Section number of the statement
+L SELECTCT                       Access count for select
+L SEQNO                          Sequence number to identify alert
+L SEQNUM                         Host variable sequence number within exception
+L SEQUENCE                       Exception Advisor rule sequence
+L SEQUENTL                       Sequential getpage requests
+L SETWSYS                        Setw for system pages
+L SGCOUNT                        Total segments for single statement text
+L SHRTCORR                       Correlation ID - shortened for CICS
+L SMFID                          MVS system SMF ID
+L SPACE                          Kilobytes allocated to space or partition
+L SQLCODE                        SQL return code (integer)
+L SQLID                          Implicit qualifier (SQLID)
+L SQLSTATE                       SQLstate
+L SQLTEXT                        SQL text for segment
+L SQLTEXT#                       Segment number of text
+L SSID                           Db2 subsystem ID
+L STABILIZED                     Indicates if statement was stabilized
+L STAT_ACC_BYTE                  Accelerator bytes returned
+L STAT_ACC_CPU                   Accelerator CPU time
+L STAT_ACC_DB2                   Accelerator wait for Db2
+L STAT_ACC_ELAP                  Accelerator elapsed time
+L STAT_ACC_EXEC                  Accelerator execution time
+L STAT_ACC_ROW                   Accelerator rows returned
+L STAT_ACC_WAIT                  Accelerator queue wait time
+L STAT_ACC_1ROW                  Accelerator wait for first row
+L STAT_CPU                       Accumulated CPU time
+L STAT_ELAP                      Accumulated Elapsed time
+L STAT_EROWB                     Number of rows examined
+L STAT_EXECB                     Statement executions
+L STAT_GPAGB                     Number of getpages
+L STAT_INDXB                     Number of index scans
+L STAT_PGRPB                     Number of parallel groups created
+L STAT_PROWB                     Number of rows processed
+L STAT_RIDLIMTB                  # times RID list not used - exceeded Db2 limit
+L STAT_RIDSTORB                  # times RID list not used - storage shortage
+L STAT_RSCNB                     Number of table space scans
+L STAT_SORTB                     Number of sorts
+L STAT_SUS_CHILDLLOCKS           Accumulated wait time for child L-locks
+L STAT_SUS_CLAIM                 Accumulated wait time for claim requests
+L STAT_SUS_DRAIN                 Accumulated wait time for drain requests
+L STAT_SUS_GLCK                  Accumulated wait time for global locks
+L STAT_SUS_LATCH                 Accumulated wait time for latch requests
+L STAT_SUS_LOCK                  Accumulated wait time for lock requests
+L STAT_SUS_LOG                   Accumulated wait time for log write requests
+L STAT_SUS_OTHERLLOCKS           Accumulated wait time for other L-locks
+L STAT_SUS_OTHERPLOCKS           Accumulated wait time for other P-locks
+L STAT_SUS_OTHR                  Accumulated wait time for another thread reads
+L STAT_SUS_OTHW                  Accumulated wait time for another thread writes
+L STAT_SUS_PAGEPLOCKS            Accumulated wait time for page P-locks
+L STAT_SUS_PIPE                  Accumulated wait time for pipe requests
+L STAT_SUS_PLATCH                Accumulated wait time for page latch requests
+L STAT_SUS_PPPLOCKS              Accumulated wait time for PS/partition P-locks
+L STAT_SUS_PQSYNC                Accumulated wait time for parallel query waits
+L STAT_SUS_SWIT                  Accumulated wait time for execution unit switch
+L STAT_SUS_SYNIO                 Accumulated wait time for synchronous I/O
+L STAT_SYNRB                     Number of synchronous buffer reads
+L STAT_WRITB                     Number of buffer writes
+L STATSCRU                       Crud index value for stmt
+L STATSDELETES                   Rows/LOBs/index entries deleted since RUNSTATS
+L STATSINSERTS                   Rows/LOBs/index entries inserted since RUNSTATS
+L STATSLASTTIME                  Last time that RUNSTATS utility ran for object
+L STATSMASSDELETE                Mass deletes or dropped tables from segmented
+L STATSROW                       Row count for SQL
+L STATSUPDATES                   Rows updated since RUNSTATS
+L STATS01                        Reserved for future use
+L STATS101                       Reserved for future use
+L STMT_CALLTYPE                  "STATIC" or "DYNAMIC"
+L STMT_SECTION                   Statement section number
+L STMT_STMTNO                    Statement number
+L STMT_TEXTHASH                  Statement text hash
+L STMTID                         Identification token assigned by BMC
+L STMTNO                         Statement number from program
+L STMTTYNO                       Statement type number
+L STMTTYPE                       Statement type
+L SUNITS                         Service units, measure CPU consumption of SQL
+L SURANK                         Ranking in workload by predicted service units
+L SUSHARE                        Share in workload of predicted service units
+L SWITCHCT                       Package switch count
+L SYNCIO                         Synchronous I/O count
+L SYNCIOEXC                      1=increase in sync I/Os > threshold
+L SYNCIOPCT                      Percentage increase in sync I/Os since REORG
+L SYNCIOT                        Accumulated time for synchronous I/O
+L SYNCIOTHR                      Reorg Advisor threshold for sync I/O increase
+L SYNCWAIT                       Synchronous I/O wait time (QWACAWTI)
+L SYS_END                        End time for system-period data versioning
+L SYS_START                      Start time for system-period data versioning
+L TABCREAT                       Associated table creator
+L TABDBID                        Associated table database ID
+L TABLE_FARINDREF                Far relocate row count captured by Reorg Adv
+L TABLE_FARRELOCEXC              1=percentage of far relocated rows > threshold
+L TABLE_FARRELOCPCT              Percentage of rows that are relocated far
+L TABLE_FARRELOCTHR              Reorg Advisor threshold for far relocated rows
+L TABLE_NEARINDREF               Near relocate row count captured by Reorg Adv
+L TABLE_REORGINSERTS             Inserts since REORG captured by Reorg Advisor
+L TABLE_REORGUNCLUSTINS          Unclustered inserts captured by Reorg Advisor
+L TABLE_TOTALROWS                Row count for space/partition captured by ReAdv
+L TABLE_UNCLUSEXC                1=percentage unclustered inserts > threshold
+L TABLE_UNCLUSPCT                Percent of rows that were inserted unclustered
+L TABLE_UNCLUSTHR                Reorg Advisor threshold for unclustered inserts
+L TABOBID                        Associated table object ID
+L TABOBNM                        Associated table object name
+L TABPSID                        Associated table pageset ID
+L TBCREATOR                      Table creator
+L TBNAME                         Table name
+L TEXT                           Text of Exception Advisor rule
+L TEXTHASH                       Statement text hash, same for all segs of stmt
+L TEXTHSH2                       SQL text hash calculated with literals included
+L TEXTTAB                        SQL text table for Exception Advisor run
+L THRESHOLD                      Exception Advisor rule threshold
+L THRDCANS                       Times thread terminated while stmt in progress
+L TIMERONS                       Predicted cost of SQL statement
+L TOTALENTRIES                   Number of entries in index space
+L TOTALROWS                      Number of rows in table space
+L TRANS_START                    Start transaction ID for data versioning
+L TRUETYPE                       True statement type
+L TSNAME                         Tablespace name
+L TYPE                           Space type or host variable data type
+L UNCATTIM                       Uncategorized time (elapsed - (CPU + wait))
+L UNCOMPRESSEDDATASIZE           Not used, always zero
+L UNLDTYPE                       Unload type Scheduled, Early, Cmd, or Term
+L UPDATECT                       Access count for update
+L UPDATED                        Time when Exception Advisor rule was updated
+L UPDATESIZE                     Net bytes added/removed by UPDATE since REORG
+L UPDATESTATSTIME                Time when realtime statistics were last updated
+L USERID                         PREPARE authorization ID or "<STATIC>"
+L VALUE                          Host var or Exception Advisor historical value
+L VALUETAB                       Exception value table for Exception Advisor run
+L VERSION                        Version of package or DBRM
+L WRNA                           Translation error
+L WRN0                           Warning indicator
+L WRN1                           Truncation
+L WRN2                           Nulls ignored
+L WRN3                           Item mismatch
+L WRN4                           Upd or del all rows
+L WRN5                           Ap not optimal
+L WRN6                           Null where
+L WRN7                           Decmial conv
+L WRN8                           Transate error
+L WRN9                           Arith excp
+L WSUNITS                        Service units predicted by stmts accessing obj
+L WTIMERON                       Timerons predicted by stmts accessing obj
+L ZHLREADCPU                     CPU time by sync reads using zHYPERLINK process
+L ZHLREADIO                      Number of sync reads using zHYPERLINK process
+L ZIIPTIME                       CPU time consumed on zIIP specialty processor
