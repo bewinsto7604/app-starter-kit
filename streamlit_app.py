@@ -79,8 +79,6 @@ num_total_characters = sum([len(x.page_content) for x in docs])
 print (f"Now you have {len(docs)} documents that have an average of {num_total_characters / len(docs):,.0f} characters (smaller pieces)")
 
 embeddings = OpenAIEmbeddings(openai_api_key="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")
-# Embed your documents and combine with the raw text in a pseudo db. Note: This will make an API call to OpenAI
-docsearch = FAISS.from_documents(docs, embeddings)
 # App title
 st.set_page_config(page_title="🤗💬 HugChat")
 
