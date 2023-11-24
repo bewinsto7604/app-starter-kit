@@ -63,6 +63,31 @@ print (f"You have {len(index3_doc[0].page_content)} characters in that document"
 print (f"You have {len(index4_doc)} document")
 print (f"You have {len(index4_doc[0].page_content)} characters in that document")
 
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=400)
+docs = text_splitter.split_documents(doc)
+rec_docs = text_splitter.split_documents(rec_doc)
+expert_docs = text_splitter.split_documents(expert_doc)
+index1_docs = text_splitter.split_documents(index1_doc)
+index2_docs = text_splitter.split_documents(index2_doc)
+index3_docs = text_splitter.split_documents(index3_doc)
+index4_docs = text_splitter.split_documents(index4_doc)
+explain_docs = text_splitter.split_documents(explain_doc)
+whatif_docs = text_splitter.split_documents(whatif_doc)
+
+num_total_characters = sum([len(x.page_content) for x in docs])
+print (f"Now you have {len(docs)} documents that have an average of {num_total_characters / len(docs):,.0f} characters (smaller pieces)")
+
+!pip install faiss-gpu
+embeddings = OpenAIEmbeddings(openai_api_key="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")
+
+# Embed your documents and combine with the raw text in a pseudo db. Note: This will make an API call to OpenAI
+docsearch = FAISS.from_documents(docs, embeddings)
+
+qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
+
+query = "What is QTXADEA?"
+qa.run(query)
 # App title
 st.set_page_config(page_title="🤗💬 HugChat")
 
