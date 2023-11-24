@@ -81,6 +81,7 @@ num_total_characters = sum([len(x.page_content) for x in docs])
 print (f"Now you have {len(docs)} documents that have an average of {num_total_characters / len(docs):,.0f} characters (smaller pieces)")
 embeddings = OpenAIEmbeddings()
 docsearch = FAISS.from_documents(docs, embeddings)
+llm=OpenAI(temperature=0)
 qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
 query = "What is QTXADEA?"
 qa.run(query)
