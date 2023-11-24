@@ -11,6 +11,8 @@ from langchain.agents.agent_types import AgentType
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.sql_database import SQLDatabase
+import openai
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 username = "dbmasteruser" 
 password = "{ZNjABk<=8R3b&L)]v*mHL9jyi1(2J[w" 
 host = "ls-33fa4ea7c905e7c94ad71a9651449adfc0d5b2d3.c9pxztxaqz52.us-east-1.rds.amazonaws.com" 
@@ -19,8 +21,8 @@ mydatabase = "BASELINE_STMT_STATISTICS"
 mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydatabase}"
 db = SQLDatabase.from_uri(mysql_uri)
 agent_executor = create_sql_agent(
-    llm=OpenAI(temperature=0, openai_api_key="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"),
-    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0, openai_api_key="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")),
+    llm=OpenAI(temperature=0),
+    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0)),
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
@@ -77,8 +79,6 @@ whatif_docs = text_splitter.split_documents(whatif_doc)
 
 num_total_characters = sum([len(x.page_content) for x in docs])
 print (f"Now you have {len(docs)} documents that have an average of {num_total_characters / len(docs):,.0f} characters (smaller pieces)")
-import openai
-openai.api_key = st.secrets["OPENAI_API_KEY"]
 embeddings = OpenAIEmbeddings()
 docsearch = FAISS.from_documents(docs, embeddings)
 # App title
