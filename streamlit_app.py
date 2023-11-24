@@ -80,13 +80,6 @@ print (f"Now you have {len(docs)} documents that have an average of {num_total_c
 
 embeddings = OpenAIEmbeddings(openai_api_key="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")
 
-# Embed your documents and combine with the raw text in a pseudo db. Note: This will make an API call to OpenAI
-docsearch = FAISS.from_documents(docs, embeddings)
-
-qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
-
-query = "What is QTXADEA?"
-qa.run(query)
 # App title
 st.set_page_config(page_title="🤗💬 HugChat")
 
