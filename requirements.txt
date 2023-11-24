@@ -5,3 +5,4 @@ langchain-experimental==0.0.37
 mysql-connector-python==8.2.0
 openai==0.28.1
 faiss-gpu
+tiktok==0.3.1
