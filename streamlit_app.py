@@ -4,6 +4,7 @@ from hugchat.login import Login
 
 from langchain.agents import create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
+from langchain.llms.openai import OpenAI
 
 # from langchain.agents import AgentExecutor
 from langchain.agents.agent_types import AgentType
