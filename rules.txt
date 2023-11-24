@@ -1,0 +1,165 @@
+*************************** REXX **************************************
+*                                                                     *
+*   $BMCCHG BQU2243,KSZ,20190514 Handle GETPAGES over INTEGER limit   *
+*                                                                     *
+*************************** REXX **************************************
+*
+RULE:Deadlocks;ITEM=QTXADEA; > 0
+HISTORY:Threshold
+This statement has experienced a deadlock.  To avoid deadlocks, insure
+that applications access tables in the same order.
+*
+RULE:Timeouts;ITEM=QTXATIM; > 0
+HISTORY:Threshold
+This statement has experienced a timeout.
+*
+RULE:Escalations;ITEM=QTXALEX+QTXALES; > 0
+HISTORY:Threshold
+This statement has experienced lock escalations, where the maximum
+page locks per tablespace are exceeded.  The maximum lock value is
+specified in DB2 install panel DSNTIPJ.
+*
+RULE:Timeouts per Escalation;RATIO=QTXADEA+QTXATIM/QTXALEX+QTXALES; > 0
+HISTORY:Threshold
+This statement experienced a timeout or deadlock, most likely due to
+lock escalation.
+*
+RULE:SyncIO Wait percentage;PERCENTAGE=SYNCWAIT/ELAPTIME; > 30
+This execution spent a large percentage of time performing
+synchronous I/Os.  If the getpage count has risen, it can indicate
+a need to rebind the program, update catalog statistics for accessed
+objects, or reorganize affected objects.  Also check for RID list
+failures for the statement and buffer pool performance for accessed
+objects.
+*
+RULE:Getpage count;ITEM=GETPAGES(31, 0);
+REPORT:ALWAYS
+*
+RULE:Getpages per SyncIO;RATIO=GETPAGES(31, 1)/QBACRIO; < 2
+This execution invoked a high level of synchronous I/O activity
+in proportion to getpages.  This can indicate a need to tune the
+buffer pool(s) involved.  Also check for the need to reorganize
+accessed objects using the REORG Advisor, and evaluate the access
+path chosen using Workload Compare.
+*
+RULE:Lock wait percentage;PERCENTAGE=QWACAWTL/ELAPTIME; > 30
+This execution spent a high percentage of time waiting on locks or
+latches.  You can use EXPLAIN to determine the locking characteristics
+of this statement; you can get details on locking activity with
+BMC AMI Ops for Db2.
+*
+RULE:Drain wait percentage;PERCENTAGE=QWACAWDR/ELAPTIME; > 30
+This execution spent a high percentage of time waiting on drain locks.
+You can use EXPLAIN to determine the locking characteristics
+of this statement; you can get details on locking activity with
+BMC AMI Ops for Db2.
+*
+RULE:Claim release wt pct;PERCENTAGE=QWACAWCL/ELAPTIME; > 30
+This execution spent a high percentage of time waiting on drain locks
+while waiting for a claim to be released.
+You can use EXPLAIN to determine the locking characteristics
+of this statement; you can get details on locking activity with
+BMC AMI Ops for Db2.
+*
+RULE:Page latch wait pct;PERCENTAGE=QWACAWTP/ELAPTIME; > 30
+This execution spent a high percentage of time waiting on page latches.
+This could be an issue with concurrently running RUNSTATS or COPY
+utilities with SHRLEVL(CHANGE) option.
+*
+RULE:Notify messages wt;PERCENTAGE=QWACAWTG/ELAPTIME; > 30
+This execution spent a high percentage of time waiting due to the
+sending of messages to other data sharing group members.  This could be
+related to object changes due to DDL.
+*
+RULE:Global contention;PERCENTAGE=QWACAWTJ/ELAPTIME; > 30
+This execution spent a high percentage of time waiting due to global
+contention for parent L-locks, required for inter-system communication.
+*
+RULE:Child L-Lock wait;PERCENTAGE=QWACAWTK/ELAPTIME; > 30
+This execution spent a high percentage of time waiting due to global
+contention for child L-locks, required for inter-system communication.
+*
+RULE:Other L-Lock wait;PERCENTAGE=QWACAWTM/ELAPTIME; > 30
+This execution spent a high percentage of time waiting due to global
+contention for other L-locks, required for inter-system communication.
+*
+RULE:Pageset P-Lock wt;PERCENTAGE=QWACAWTN/ELAPTIME; > 30
+This execution spent a high percentage of time waiting due to global
+contention for pageset or partition P-locks, required for inter-system
+communication.
+*
+RULE:Page P-Lock wait;PERCENTAGE=QWACAWTO/ELAPTIME; > 30
+This execution spent a high percentage of time waiting due to global
+contention for page P-locks, required for inter-system
+communication.
+*
+RULE:Other P-Lock wait;PERCENTAGE=QWACAWTQ/ELAPTIME; > 30
+This execution spent a high percentage of time waiting due to global
+contention for other P-locks, required for inter-system
+communication.
+*
+RULE:RLF Parallel Disablements;ITEM=QXRLFDPA; > 0
+HISTORY:Threshold
+Query parallelism was disabled by the Resource Limit Facility.
+*
+RULE:Reduced Degree Parallelism;ITEM=QXREDGRP; > 0
+HISTORY:Threshold
+The number of parallel groups did not reach the planned level due to
+buffer pool limitations.  Increase the size of the buffer pool in which
+objects accessed by this statement reside.
+*
+RULE:Buffer Pool Parallel Disablement;ITEM=QXDEGBUF; > 0
+HISTORY:Threshold
+This query fell back to sequential mode due to buffer pool limitations.
+Increase the size of the buffer pool in which objects accessed by this
+statement reside.
+*
+RULE:Curser Parallel Disablement;ITEM=QXDEGCUR; > 0
+HISTORY:Threshold
+This query fell back to sequential mode due to a cursor that can be
+used by UPDATE or DELETE.
+*
+RULE:ESA Parallel Disablement;ITEM=QXDEGESA; > 0
+HISTORY:Threshold
+This query fell back to sequential mode due to lack of ESA sort support.
+*
+RULE:Coordinator=N Single DB2;ITEM=QXCOORNO; > 0
+HISTORY:Threshold
+This query executed on only one DB2 subsystem because the coordinator
+subsystem value is set to NO.
+*
+RULE:Isolation Single DB2;ITEM=QXISORR; > 0
+HISTORY:Threshold
+This query executed on only one DB2 subsystem because the isolation is
+set for repeatable-read or read-stability.
+*
+RULE:Config Reformulate Par;ITEM=QXREPOP1; > 0
+HISTORY:Threshold
+The parallel query was reformulated because the number of data sharing
+groups differed between bind time and run time.
+*
+RULE:Buffer Reformulate Par;ITEM=QXREPOP2; > 0
+HISTORY:Threshold
+The parallel query was reformulated because one or more members of the
+data sharing group had insufficient buffer pool resources.
+*
+RULE:Skipped members;ITEM=QXXCSKIP; > 0
+HISTORY:Threshold
+The parallel query processing had to skip members in the data sharing
+group due to inadequate buffer pool size at the member(s).
+*
+RULE:DTT SIngle DB2;ITEM=QXDEGDTT; > 0
+HISTORY:Threshold
+The query executed on only one DB2 subsystem because a declared
+temporary table was detected during execution of a user-defined
+function.
+*
+RULE:Limit RID Failure;ITEM=QXMRMIAP; > 0
+HISTORY:Threshold
+List prefetch processing failed because a RID list exceeded the
+internal limit specified on DB2 installation panel DSNTIPC.
+*
+RULE:Storage RID Failure;ITEM=QXNSMIAP; > 0
+HISTORY:Threshold
+List prefetch processing failed because no storage was available
+to hold a RID list.

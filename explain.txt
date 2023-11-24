@@ -1,0 +1,39 @@
+ LBL   STMTNO            COST*RATE SQL-STATEMENT
+ XD01      93           229.292007 SELECT LAST, FIRST, BALANCE FROM        AFD4.CUSTOMERS WHERE CUSTID=?
+       SELECT   LAST
+              , FIRST
+              , BALANCE
+       FROM     AFD4.CUSTOMERS
+       WHERE    CUSTID = ?
+       BMC184750S-This query references one or more tables that are missing
+                  cardinality statistics.
+       BMC184746W-DB2 does not have enough information for a reasonable cost
+                  estimate. Default values were used.
+       BMC184028I-The tables referenced in the FROM clause are fully
+                  qualified. This will limit the flexibility for the
+                  qualifier to be resolved at bind time.
+       BMC184399I-ACCELMODEL NOT_ELIGIBLE.
+                  COST*RATE QB PL MIX QTYPE  METH ACC MTCH IX TBCREATOR TBNAME             IXNAME             NU J O G CU
+ XD01            229.292007  1  1   0 SELECT    0 R      0 N  AFD4      CUSTOMERS                             N  N N N N
+       BMC184402W-The table will be accessed using a tablespace scan. Unless
+                  most rows in this table are retrieved, an appropriate
+                  index would be more efficient.
+       BMC184428W-The table data pages will be accessed to satisfy this
+                  portion of the query. This requires additional overhead.
+       BMC184456W-The LOCK mode for this access is Intent SHARE.
+       BMC184468W-The data will be retrieved using Sequential Prefetch.
+       BMC184476W-Column function evaluation is not used OR column function
+                  evaluation will be determined at execution time.
+       BMC184384I-This table is the first table accessed in the query:
+                  AFD4.CUSTOMERS.
+       BMC184398I-This query is not eligible for Acceleration. Reason:4-The
+                  query is not read only.
+       CREATOR  TBNAME            CARD    NPAGES COMP  NACTIVE PARENT CHILD BPOOL DATABASE LOCK PARTS PGSIZE SEGSIZE PCTP
+       AFD4     CUSTOMERS           -1        -1   -1       -1      0     0 BP8K0 ALERTDB4 A       25      8      64
+          COLNO COLUMN NAME               CARD TYPE      LEN HI2KEY           LO2KEY            SCALE NULLS STATSTIME
+              1 CUSTID                      -1 BIGINT      8                                        0 N     0001-01-01-00
+              2 LAST                        -1 CHAR       20                                        0 N     0001-01-01-00
+              3 FIRST                       -1 CHAR       20                                        0 N     0001-01-01-00
+              4 CONTACT                     -1 DATE        4                                        0 N     0001-01-01-00
+              5 BALANCE                     -1 INTEGER     4                                        0 N     0001-01-01-00
+              6 NOTES                       -1 CHAR      120                                        0 Y     0001-01-01-00

@@ -1,0 +1,30 @@
+1CLONE  Objects in database PSS80995
+ LBL   STMTNO            COST*RATE SQL-STATEMENT
+ WI01*     93            66.885590 SELECT LAST, FIRST, BALANCE FROM        AFD4.CUSTOMERS WHERE CUSTID=?
+ XD01      93           229.292007 SELECT LAST, FIRST, BALANCE FROM        AFD4.CUSTOMERS WHERE CUSTID=?
+                  COST*RATE QB PL MIX QTYPE  METH ACC MTCH IX TBCREATOR TBNAME             IXNAME             NU J O G CU
+ WI01*            66.885590  1  1   0 SELECT    0 I      1 N  PSSF70F5  CUSTOMERS          NEWIDX             N  N N N N
+       CREATOR  TBNAME            CARD    NPAGES COMP  NACTIVE PARENT CHILD BPOOL DATABASE LOCK PARTS PGSIZE SEGSIZE PCTP
+       PSSF70F5 CUSTOMERS           -1        -1   -1       -1      0     0 BP8K0 PSS80995 A       25      8      64
+          COLNO COLUMN NAME               CARD TYPE      LEN HI2KEY           LO2KEY            SCALE NULLS STATSTIME
+              1 CUSTID                      -1 BIGINT      8                                        0 N     0001-01-01-00
+              2 LAST                        -1 CHAR       20                                        0 N     0001-01-01-00
+              3 FIRST                       -1 CHAR       20                                        0 N     0001-01-01-00
+              4 CONTACT                     -1 DATE        4                                        0 N     0001-01-01-00
+              5 BALANCE                     -1 INTEGER     4                                        0 N     0001-01-01-00
+              6 NOTES                       -1 CHAR      120                                        0 Y     0001-01-01-00
+          IXNAME          1STKEY     FULLKEY NLEAF NLEVELS CLUSTERRATIO CLUSTERING CLUSTERED   FAROFF  NEAROFF LEAFDIST U
+          NEWIDX              -1          -1    20       2 0.8000000000 N                          -1       -1       -1 D
+             KEY COLUMN         COLNO ORDERING
+             CUSTID                 1 A
+             LAST                   2 A
+ XD01            229.292007  1  1   0 SELECT    0 R      0 N  AFD4      CUSTOMERS                             N  N N N N
+       CREATOR  TBNAME            CARD    NPAGES COMP  NACTIVE PARENT CHILD BPOOL DATABASE LOCK PARTS PGSIZE SEGSIZE PCTP
+       AFD4     CUSTOMERS           -1        -1   -1       -1      0     0 BP8K0 ALERTDB4 A       25      8      64
+          COLNO COLUMN NAME               CARD TYPE      LEN HI2KEY           LO2KEY            SCALE NULLS STATSTIME
+              1 CUSTID                      -1 BIGINT      8                                        0 N     0001-01-01-00
+              2 LAST                        -1 CHAR       20                                        0 N     0001-01-01-00
+              3 FIRST                       -1 CHAR       20                                        0 N     0001-01-01-00
+              4 CONTACT                     -1 DATE        4                                        0 N     0001-01-01-00
+              5 BALANCE                     -1 INTEGER     4                                        0 N     0001-01-01-00
+              6 NOTES                       -1 CHAR      120                                        0 Y     0001-01-01-00

@@ -1,0 +1,43 @@
+The original theory of the BASELINE tables was that a customer could pick a period in time when performance was “nominal” and then populate the BASELINE tables with Apptune data from that time period.  In practice I don’t think many customers have adopted the idea.  More common is to accumulate history and then detect departures from the norm using history.  Apptune has a rule-based feature that takes this approach, where a user can establish criteria such as “let me know of any statement that is using 20% more CPU today than it did during same time period yesterday, or on average over the same time period from the past week”.
+
+But with that background in mind, I wonder if I can give you directions that would enable you to browse through the entire set of tables and columns available in our Performance Advisor Database?  Do you have access to the “SideB” LPARs?  If so, you could issue clist “AFDQAD0” to enter the product, then take option 9 for Administration, then option Z for “PADB Starter JCL”, then enter DSN “MDB.PADB1310.CNTL” as the “STARTER SET LIBRARY”, and hit Enter.
+
+Fill in the resulting “Properties” prompts as follows (or with your own job card specs if desired):
+
+PADB Properties                                 
+ Creator . . : MDB1310_                         
+ Db2 SSID  . : DNY3                             
+ DSNLOAD . . : CSGI.DB2V13M.DSNLOAD_____________
+DSNEXIT . . : CSG.DNY3.DSNEXIT_________________
+                                                
+Generate JCL to create database  : N            
+Generate JCL to maintain database: y            
+                                                
+JOB Statement Information:                      
+//MDBPADB  JOB (4110,INFO),'MIKE BEHNE',        
+// MSGCLASS=X,CLASS=A,MSGLEVEL=(1,1),           
+// NOTIFY=&SYSUID                               
+//*                                             
+
+Then the “Maintenance” prompts as follows:
+
+Advisors to support (Y/N)                                     
+ Reorg Advisor . . : Y     Workload Index Advisor  . . : Y    
+ Exception Advisor : Y     Workload Access Path Compare: Y    
+                           Workload Statistics Advisor : Y    
+                                                              
+DMDBMERG Customization                                        
+ GDG HLQ           : MDB.MDB1310.PADB__                       
+ GDG Limit         : 3__                                      
+ Unit Name         : SYSALLDA                                 
+ Use BMC AMI Load for Db2 to maintain PADB tables: N          
+  Loadlib           : ________________________________________
+  Where Found       : LOAD MODULE NOT FOUND                   
+  SCC Loadlib       : ________________________________________
+  SCC Where Found   : AFDQA.V13R1M00.LOAD                     
+
+At this point you will have a scrollable list of all tables that we offer.  You can pick each table with “S” to get a scrollable list of columns with descriptions.  There are quite a few columns with names that start with “Q” that are taken from IBM’s trace record field names, described in the DSNWMSGS member of Db2 DSNIVPD library.
+
+You will also see that column names are the same between many of the tables, e.g. BASELINE_STMT_STATISTICS, DAILY_STMT_STATISTICS, MONTHLY_STMT_STATISTICS have the same columns, just rolled up at different granularities of time.
+
+The WKLD tables are a subset of STMT tables, but aggregated such that you could see numbers at the package level, or plan level, or user level, etc. but not at the statement level as seen in STMT tables.

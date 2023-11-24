@@ -1,0 +1,133 @@
+To improve the performance of the below SQL query, We tried to add XP_NBR column to LC0INDEX of TABLE_1, to make it "index only". Note that LC0INDEX already had LOC_NBR and LOC_TYP_CD columns.
+ 
+SELECT TB1.XP_NBR , TB1.LOC_NBR                                      
+FROM   TABLE_1 TB1, TABLE_2 TB2        
+WHERE  TB2.XTM_ID       = :H   
+  AND  TB2.XTM_KEY_TYP_CD ='XTMCD'                  
+  AND  TB2.XXSE_LOC_NBR   = :H          
+  AND  TB2.XXSE_LOC_TYP_CD = 'W'                      
+  AND  TB2.XXND_LOC_TYP_CD = 'V'        
+  AND  TB2.XXND_LOC_NBR = TB1.LOC_NBR   
+  AND  TB1.LOC_TYP_CD =  'V'                            
+FETCH FIRST ROW ONLY      
+ 
+Initially TABLE_2 was using VR0INDEX. After LC0INDEX change, DB2 chooses VZ1INDEX for TABLE_2.
+Index details, statistics and PLAN_TABLE entries are given below.
+ 
+Both VR0INDEX, VZ1INDEX of TABLE_2 have same set of columns, but in different order.
+ 
+I am trying to understand why changing the index of TABLE_1,  makes DB2 to choose different index for TABLE_2. Could you please help on this ?
+ 
+ 
+Total rows in TABLE_1 is 102,517. PLAN_TABLE shows LC0INDEX is used for TABLE_1
+ 
+Total rows in TABLE_2 is 1,078,169. 
+ 
+Before adding XP_NBR column to LC0INDEX of TABLE_1, PLAN_TABLE shows VR0INDEX is used for TABLE_2.
+ 
+After adding XP_NBR column to LC0INDEX of TABLE_1, PLAN_TABLE shows VZ1INDEX is used for TABLE_2.
+ 
+ 
+Columns for LC0INDEX(Cardinality of each column is given in the bracket)
+---------------------                                
+LOC_NBR    (101878) 
+LOC_TYP_CD (10)  
+XP_NBR     (18473)
+ 
+ 
+Indexes of TABLE_2 are VR0INDEX, VZ1INDEX and they are given below with statistics.
+ 
+Columns for VR0INDEX (Cardinality of each column is given in the bracket)
+--------------------- 
+XTM_KEY_TYP_CD  (1) 
+XTM_ID          (543156)   
+XXSE_LOC_TYP_CD (1)  
+XXSE_LOC_NBR    (47)   
+XXND_LOC_TYP_CD (1)   
+XXND_LOC_NBR    (31744)  
+ 
+Columns for VZ1INDEX (Cardinality of each column is given in the bracket)
+---------------------
+XXSE_LOC_TYP_CD (1)            
+XXSE_LOC_NBR    (47)            
+XTM_KEY_TYP_CD  (1)           
+XTM_ID          (543156)           
+XXND_LOC_TYP_CD (1)           
+XXND_LOC_NBR    (31744)
+           
+ 
+VR0INDEX statistics
+--------------------
+COLCOUNT = 6
+FIRSTKEYCARD = 1
+FULLKEYCARD = 1078169
+NLEAF = 9892
+NLEVELS = 3
+BPOOL = BP2     
+PGSIZE = 4
+CLUSTERRATIO = 100
+AVGKEYLEN = 26
+DATAREPEATFACTORF = 7309
+FAROFFPOS = 0
+NEAROFFPOSF = 277
+LEAFNEAR = 71
+LEAFFAR = 0
+ 
+ 
+VZ1INDEX statistics
+--------------------
+COLCOUNT = 6
+FIRSTKEYCARD = 1
+FULLKEYCARD = 1078169
+NLEAF = 9892
+NLEVELS = 3
+BPOOL = BP2     
+PGSIZE = 4
+CLUSTERRATIO = 99
+AVGKEYLEN = 26
+DATAREPEATFACTORF = 139,143
+FAROFFPOS = 151
+NEAROFFPOSF = 27,885
+LEAFNEAR = 80
+LEAFFAR = 0
+ 
+ 
+Before adding XP_NBR column to LC0INDEX of TABLE_1, below is the PLAN_TABLE entries
+ 
+PLANNO = 1
+METHOD = 0
+TNAME = TABLE_2
+TABNO = 2
+ACCESSTYPE = I
+MATCHCOLS = 5
+ACCESSNAME = VR0INDEX
+INDEXONLY = Y
+ 
+PLANNO = 2
+METHOD = 1
+TNAME = TABLE_1
+TABNO = 1
+ACCESSTYPE = I
+MATCHCOLS = 2
+ACCESSNAME = LC0INDEX
+INDEXONLY = N 
+ 
+After adding XP_NBR column to LC0INDEX of TABLE_1, below is the PLAN_TABLE entries
+ 
+PLANNO = 1
+METHOD = 0
+TNAME = TABLE_2
+TABNO = 2
+ACCESSTYPE = I
+MATCHCOLS = 5
+ACCESSNAME = VZ1INDEX
+INDEXONLY = Y
+ 
+PLANNO = 2
+METHOD = 1
+TNAME = TABLE_1
+TABNO = 1
+ACCESSTYPE = I
+MATCHCOLS = 2
+ACCESSNAME = LC0INDEX
+INDEXONLY = Y

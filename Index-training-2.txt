@@ -1,0 +1,20 @@
+This is in response to your inquiry earlier today about the Performance Advisor Database with SQL metrics as collected by Apptune, for your large language modeling project.  Apologies that I couldn’t get back to you sooner and that this is a little rushed, but with an extended absence starting Monday, I had quite a few things to try and get to today.  I am copying some folks who could offer assistance if you get stuck.  Also, I’m attaching an email I sent to Wenjie earlier this week, as she is also looking into PADB as a provider of data for BMC AMI Ops Insights.  The email describes a method to get into a dialog on mainframe and browse through a list of tables and columns comprising PADB.
+
+Our team maintains PADB tables on a set of Db2 subsystems that start with “DNY” residing across our “SideB” z/OS LPARs.  For “SQL Metrics”, you’d probably want to consider the following:
+
+STMT_STATISTICS: Performance metrics at the SQL statement level, with time accumulations corresponding to Apptune collection intervals (typically 1-24 hours)
+DAILY_STMT_STATISTICS: Same as above, but accumulated per day
+WEEKLY_STMT_STATISTICS: accumulated per week
+MONTHLY_STMT_STATISTICS: accumulated per month
+
+The latest “GA” version of tables is maintained using alias nomenclature as CURRENT.<table name>.  So if you connect to a DNY Db2 ssid, you can issue “SELECT * FROM CURRENT.DAILY_STMT_STATISTICS” to see the metrics.
+
+These Db2 subsystems starting with “DNY” are used by the team quite a bit for development and testing, might move around or be stopped/restarted from time to time.  In considering a method to query the data on a subsystem with the most stability, Janet or Samuel may have input, but I’d be inclined to log onto the LPAR called IMSA and then connect to DNYA.  I would typically use SPUFI option 3.B for initial investigation/query, although you could also use BMC AMI Command Center as your conduit for SQL queries on the database.
+
+But for simplicity, I would suggest you start by logging onto IMSA, go to SPUFI option 3.B specifying “DNYA” as your Db2, then issue “SELECT * FROM CURRENT.DAILY_STMT_STATISTICS” to get an example of SQL Metrics content.  Typical columns of interest to start would be TEXTHASH, CPUTIME, ELAPTIME.  So you could select on just those columns to start.  Once you have a TEXTHASH, and it is not a special case such as “C0C0C0…” (repeating pattern, commit statement in this example), then you can also issue a query to see the SQL text, for example:
+
+SELECT SQLTEXT FROM CURRENT.STMT_TEXT    
+   WHERE TEXTHASH='4426989811B0AB1B9959' 
+   ORDER BY SQLTEXT#;                    
+
+Then for more description of the tables and columns available overall, refer to the procedure that I describe in the attached email.
