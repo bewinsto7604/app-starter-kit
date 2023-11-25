@@ -60,8 +60,9 @@ if query := st.chat_input("Ask me anything"):
         message_placeholder = st.empty()
         # Send user's question to our chain
         result = agent_executor.run("Which SQLSTMT is a POORLY PERFORMING SQL?")
+        response = result
         # result = chain({"question": query})
-        response = result['Final Answer']
+        # response = result['answer']
         full_response = ""
         # Simulate stream of response with milliseconds delay
         for chunk in response.split():
