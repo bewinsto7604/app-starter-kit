@@ -84,10 +84,10 @@ if query := st.chat_input("Ask me anything"):
             response = result
             print(response)
         else:
-            result = qa.run(query)
-            response = result
-            # result = chain({"question": query})
-            # response = result['answer']
+            # result = qa.run(query)
+            # response = result
+            result = chain({"question": query})
+            response = result['answer']
         # result = chain({"question": query})
         # response = result['answer']
         full_response = ""
