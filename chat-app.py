@@ -9,6 +9,7 @@ st.set_page_config(
     page_title="Your Notion Chatbot",
     page_icon=company_logo
 )
+conn = st.experimental_connection('BASELINE_STMT_STATISTICS', type='sql')
 # Initialize LLM chain
 chain = load_chain()
 # Initialize chat history
