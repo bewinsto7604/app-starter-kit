@@ -6,5 +6,5 @@ mysql-connector-python==8.2.0
 openai==0.28.1
 faiss-gpu
 tiktoken==0.3.1
-SQLAlchemy
+SQLAlchemy==1.4
 mysqlclient
