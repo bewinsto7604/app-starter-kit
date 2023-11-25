@@ -2,6 +2,8 @@
 import time
 import streamlit as st
 from utils import load_chain
+import subprocess
+import sys
 from langchain.agents import create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.llms.openai import OpenAI
@@ -36,7 +38,10 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=400)
 docs = text_splitter.split_documents(doc)
 num_total_characters = sum([len(x.page_content) for x in docs])
-!pip install faiss-gpu
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+install(faiss-gpu)
 embeddings = OpenAIEmbeddings(openai_api_key=openaikey)
 # Embed your documents and combine with the raw text in a pseudo db. Note: This will make an API call to OpenAI
 docsearch = FAISS.from_documents(docs, embeddings)
