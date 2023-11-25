@@ -11,8 +11,8 @@ from langchain.agents.agent_types import AgentType
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.sql_database import SQLDatabase
-username = "dbmasteruser" 
-password = "" 
+password = st.secrets["DB_PASSWORD"]
+username = "dbmasteruser"  
 host = "ls-33fa4ea7c905e7c94ad71a9651449adfc0d5b2d3.c9pxztxaqz52.us-east-1.rds.amazonaws.com" 
 port = "3306"
 mydatabase = "BASELINE_STMT_STATISTICS"
