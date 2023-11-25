@@ -25,6 +25,11 @@ agent_executor = create_sql_agent(
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
+
+agent_executor.run(
+    "Which SQLSTMT is a POORLY PERFORMING SQL?"
+)
+
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
