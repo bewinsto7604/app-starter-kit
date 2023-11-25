@@ -60,7 +60,7 @@ if query := st.chat_input("Ask me anything"):
         message_placeholder = st.empty()
         # Send user's question to our chain
         response = ""
-        if "POORLY PERFORMING SQL" in query:
+        if "POORLY_PERFORMING_SQL" in query:
             print("enter")
             result = agent_executor.run('"' + query + '"')
             response = result
