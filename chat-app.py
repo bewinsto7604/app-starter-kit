@@ -19,6 +19,12 @@ mydatabase = "BASELINE_STMT_STATISTICS"
 mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydatabase}"
 db = SQLDatabase.from_uri(mysql_uri)
 
+agent_executor = create_sql_agent(
+    llm=OpenAI(temperature=0),
+    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0)),
+    verbose=True,
+    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+)
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
