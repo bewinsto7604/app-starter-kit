@@ -66,7 +66,6 @@ if query := st.chat_input("Ask me anything"):
         else:
             result = chain({"question": query})
             response = result['answer']
-        response = result
         # result = chain({"question": query})
         # response = result['answer']
         full_response = ""
