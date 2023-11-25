@@ -12,6 +12,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.sql_database import SQLDatabase
 password = st.secrets["DB_PASSWORD"]
+openaikey = st.secrets["OPENAI_API_KEY"]
 username = "dbmasteruser"  
 host = "ls-33fa4ea7c905e7c94ad71a9651449adfc0d5b2d3.c9pxztxaqz52.us-east-1.rds.amazonaws.com" 
 port = "3306"
@@ -20,11 +21,27 @@ mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydata
 db = SQLDatabase.from_uri(mysql_uri)
 
 agent_executor = create_sql_agent(
-    llm=OpenAI(temperature=0),
-    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0)),
+    llm=OpenAI(temperature=0, openai_api_key=openaikey),
+    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0, openai_api_key=openaikey)),
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
+from langchain.document_loaders import TextLoader
+from langchain.vectorstores import FAISS
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
+loader = TextLoader('padb-domain.txt')
+doc = loader.load()
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=400)
+docs = text_splitter.split_documents(doc)
+num_total_characters = sum([len(x.page_content) for x in docs])
+pip install faiss-gpu
+embeddings = OpenAIEmbeddings(openai_api_key=openaikey)
+# Embed your documents and combine with the raw text in a pseudo db. Note: This will make an API call to OpenAI
+docsearch = FAISS.from_documents(docs, embeddings)
+llm=OpenAI(temperature=0, openai_api_key=openaikey)
+qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
 
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
@@ -66,8 +83,10 @@ if query := st.chat_input("Ask me anything"):
             response = result
             print(response)
         else:
-            result = chain({"question": query})
-            response = result['answer']
+            result = qa.run(query)
+            response = result
+            # result = chain({"question": query})
+            # response = result['answer']
         # result = chain({"question": query})
         # response = result['answer']
         full_response = ""
