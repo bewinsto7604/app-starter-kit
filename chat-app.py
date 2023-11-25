@@ -4,11 +4,13 @@ import streamlit as st
 from utils import load_chain
 from langchain.agents import create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
+from langchain.llms.openai import OpenAI
 
 # from langchain.agents import AgentExecutor
 from langchain.agents.agent_types import AgentType
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
+from langchain.sql_database import SQLDatabase
 username = "dbmasteruser" 
 password = "" 
 host = "ls-33fa4ea7c905e7c94ad71a9651449adfc0d5b2d3.c9pxztxaqz52.us-east-1.rds.amazonaws.com" 
