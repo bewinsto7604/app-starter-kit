@@ -2,6 +2,21 @@
 import time
 import streamlit as st
 from utils import load_chain
+from langchain.agents import create_sql_agent
+from langchain.agents.agent_toolkits import SQLDatabaseToolkit
+
+# from langchain.agents import AgentExecutor
+from langchain.agents.agent_types import AgentType
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+username = "dbmasteruser" 
+password = "" 
+host = "ls-33fa4ea7c905e7c94ad71a9651449adfc0d5b2d3.c9pxztxaqz52.us-east-1.rds.amazonaws.com" 
+port = "3306"
+mydatabase = "BASELINE_STMT_STATISTICS"
+mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydatabase}"
+db = SQLDatabase.from_uri(mysql_uri)
+
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
@@ -9,7 +24,6 @@ st.set_page_config(
     page_title="Your Notion Chatbot",
     page_icon=company_logo
 )
-conn = st.experimental_connection('BASELINE_STMT_STATISTICS', type='sql')
 # Initialize LLM chain
 chain = load_chain()
 # Initialize chat history
