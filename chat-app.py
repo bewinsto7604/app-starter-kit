@@ -26,10 +26,6 @@ agent_executor = create_sql_agent(
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
 
-agent_executor.run(
-    "Which SQLSTMT is a POORLY PERFORMING SQL?"
-)
-
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
@@ -63,8 +59,9 @@ if query := st.chat_input("Ask me anything"):
     with st.chat_message("assistant", avatar=company_logo):
         message_placeholder = st.empty()
         # Send user's question to our chain
-        result = chain({"question": query})
-        response = result['answer']
+        result = agent_executor.run("Which SQLSTMT is a POORLY PERFORMING SQL?")
+        # result = chain({"question": query})
+        response = result['Final Answer']
         full_response = ""
         # Simulate stream of response with milliseconds delay
         for chunk in response.split():
