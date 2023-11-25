@@ -59,7 +59,7 @@ if query := st.chat_input("Ask me anything"):
     with st.chat_message("assistant", avatar=company_logo):
         message_placeholder = st.empty()
         # Send user's question to our chain
-        result = agent_executor.run("Which SQLSTMT is a POORLY PERFORMING SQL?")
+        result = agent_executor.run(query)
         response = result
         # result = chain({"question": query})
         # response = result['answer']
