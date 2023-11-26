@@ -10,7 +10,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.llms.openai import OpenAI
 
-openai.api_key = st.secrets["OPENAI_API_KEY"]
 username = "dbmasteruser" 
 password = st.secrets["DB_PASSWORD"]
 host = "ls-33fa4ea7c905e7c94ad71a9651449adfc0d5b2d3.c9pxztxaqz52.us-east-1.rds.amazonaws.com" 
