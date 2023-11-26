@@ -23,7 +23,7 @@ def load_chain():
 		llm = ChatOpenAI(temperature=0)
 		
 		# Load our local FAISS index as a retriever
-		vector_store = FAISS.load_local("faiss_index", embeddings)
+		vector_store = FAISS.load_local("faiss_rec_index", embeddings)
 		retriever = vector_store.as_retriever(search_kwargs={"k": 3})
 		
 		# Create memory 'chat_history' 
@@ -31,11 +31,11 @@ def load_chain():
 		
 		# Create system prompt
 		template = """
-    You are an AI assistant for answering questions about Software or Database performance.
+    You are an AI assistant for answering questions about Database performance.
     You are given the following extracted parts of a long document and a question. Provide a conversational answer.
     If you don't know the answer, just say 'Sorry, I don't know ... 😔. 
     Don't try to make up an answer.
-    If the question is not about Software or Database performance, politely inform them that you are tuned to only answer questions about Database performance.
+    If the question is not about Database performance, politely inform them that you are tuned to only answer questions about Database performance.
     
     {context}
     Question: {question}
