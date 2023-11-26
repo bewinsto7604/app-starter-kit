@@ -7,6 +7,8 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.llms.openai import OpenAI
+
 openaikey = st.secrets["OPENAI_API_KEY"]
 loader = TextLoader("padb-domain.txt")
 doc = loader.load()
