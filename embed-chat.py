@@ -39,3 +39,34 @@ for message in st.session_state.messages:
     else:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
+# Chat logic
+if query := st.chat_input("Ask me anything"):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": query})
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(query)
+    with st.chat_message("assistant", avatar=company_logo):
+        message_placeholder = st.empty()
+        # Send user's question to our chain
+        response = ""
+        if "POORLY_PERFORMING_SQL" in query:
+            print("enter")
+            result = agent_executor.run('"' + query + '"')
+            response = result
+            print(response)
+        else:
+            result = db.similarity_search(query)
+            response = result[0].page_content
+        # result = chain({"question": query})
+        # response = result['answer']
+        full_response = ""
+        # Simulate stream of response with milliseconds delay
+        for chunk in response.split():
+            full_response += chunk + " "
+            time.sleep(0.05)
+            # Add a blinking cursor to simulate typing
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+    # Add assistant message to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})            
