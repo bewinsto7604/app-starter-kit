@@ -10,6 +10,21 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.llms.openai import OpenAI
 
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+username = "dbmasteruser" 
+password = st.secrets["DB_PASSWORD"]
+host = "ls-33fa4ea7c905e7c94ad71a9651449adfc0d5b2d3.c9pxztxaqz52.us-east-1.rds.amazonaws.com" 
+port = "3306"
+mydatabase = "BASELINE_STMT_STATISTICS"
+mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydatabase}"
+db = SQLDatabase.from_uri(mysql_uri)
+agent_executor = create_sql_agent(
+    llm=OpenAI(temperature=0),
+    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0)),
+    verbose=True,
+    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+)
+
 openaikey = st.secrets["OPENAI_API_KEY"]
 loader = TextLoader("padb-domain.txt")
 rec_loader = TextLoader('rules.txt')
