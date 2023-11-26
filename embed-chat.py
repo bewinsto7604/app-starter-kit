@@ -12,7 +12,7 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 
 embeddings = OpenAIEmbeddings()
-os.environ["OPENAI_API_KEY"] = = st.secrets["OPENAI_API_KEY"]
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 db = FAISS.from_documents(docs, embeddings)
 
 query = "What is QTXACHG?"
