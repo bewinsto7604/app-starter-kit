@@ -1,4 +1,4 @@
-# **utils.py**
+# **utils-rules.py**
 import streamlit as st
 import openai
 from langchain.chains import ConversationalRetrievalChain
