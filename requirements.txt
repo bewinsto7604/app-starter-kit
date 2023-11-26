@@ -1,5 +1,6 @@
 streamlit
 chromadb
+pysqlite3-binary
 hugchat==0.0.8
 langchain==0.0.329
 langchain-experimental==0.0.37
