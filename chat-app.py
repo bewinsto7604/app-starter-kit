@@ -2,6 +2,7 @@
 import time
 import streamlit as st
 from utils import load_chain
+from utils-rules import load_chain
 import subprocess
 import sys
 from langchain.agents import create_sql_agent
