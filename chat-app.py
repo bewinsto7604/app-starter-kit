@@ -85,7 +85,7 @@ if query := st.chat_input("Ask me anything"):
             response = result
             print(response)
         else:
-            result = qa.run(query)
+            result = qa.run("What is QTXACHG?")
             response = result
             # result = chain({"question": query})
             # response = result['answer']
