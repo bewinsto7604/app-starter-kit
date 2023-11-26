@@ -31,11 +31,11 @@ def load_chain():
 		
 		# Create system prompt
 		template = """
-    You are an AI assistant for answering questions about Database performance.
+    You are an AI assistant for answering questions about Software or Database performance.
     You are given the following extracted parts of a long document and a question. Provide a conversational answer.
     If you don't know the answer, just say 'Sorry, I don't know ... 😔. 
     Don't try to make up an answer.
-    If the question is not about Database performance, politely inform them that you are tuned to only answer questions about Database performance.
+    If the question is not about Software or Database performance, politely inform them that you are tuned to only answer questions about Database performance.
     
     {context}
     Question: {question}
