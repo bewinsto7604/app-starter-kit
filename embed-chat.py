@@ -9,6 +9,11 @@ from langchain.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
 from langchain.llms.openai import OpenAI
+# from langchain.agents import AgentExecutor
+from langchain.agents.agent_types import AgentType
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+from langchain.sql_database import SQLDatabase
 
 username = "dbmasteruser" 
 password = st.secrets["DB_PASSWORD"]
