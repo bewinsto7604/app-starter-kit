@@ -44,7 +44,7 @@ docsearch = FAISS.from_documents(docs, embeddings)
 llm=OpenAI(temperature=0, openai_api_key=openaikey)
 vector_store = FAISS.load_local("faiss_index", embeddings)
 retriever = docsearch.as_retriever(search_kwargs={"k": 3})
-qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever)
+qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
