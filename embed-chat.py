@@ -7,19 +7,20 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-
+openaikey = st.secrets["OPENAI_API_KEY"]
 loader = TextLoader("padb-domain.txt")
 doc = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=400)
 docs = text_splitter.split_documents(doc)
 
-embeddings = OpenAIEmbeddings()
+embeddings = OpenAIEmbeddings(openai_api_key=openaikey)
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 docsearch = FAISS.from_documents(docs, embeddings)
+llm=OpenAI(temperature=0, openai_api_key=openaikey)
+qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
 
 query = "What is QTXACHG?"
-docs = db.similarity_search(query)
-print(docs[0].page_content)
+qa.run(query)
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
@@ -58,8 +59,9 @@ if query := st.chat_input("Ask me anything"):
             response = result
             print(response)
         else:
-            result = db.similarity_search(query)
-            response = result[0].page_content
+            
+            result = qa.run(query)
+            response = result
         # result = chain({"question": query})
         # response = result['answer']
         full_response = ""
