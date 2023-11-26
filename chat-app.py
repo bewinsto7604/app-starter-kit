@@ -42,8 +42,9 @@ embeddings = OpenAIEmbeddings(openai_api_key=openaikey)
 # Embed your documents and combine with the raw text in a pseudo db. Note: This will make an API call to OpenAI
 docsearch = FAISS.from_documents(docs, embeddings)
 llm=OpenAI(temperature=0, openai_api_key=openaikey)
-qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
-
+vector_store = FAISS.load_local("faiss_index", embeddings)
+retriever = docsearch.as_retriever(search_kwargs={"k": 3})
+qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever)
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
@@ -84,10 +85,10 @@ if query := st.chat_input("Ask me anything"):
             response = result
             print(response)
         else:
-            # result = qa.run(query)
-            # response = result
-            result = chain({"question": query})
-            response = result['answer']
+            result = qa.run(query)
+            response = result
+            # result = chain({"question": query})
+            # response = result['answer']
         # result = chain({"question": query})
         # response = result['answer']
         full_response = ""
