@@ -47,7 +47,7 @@ docsearch = FAISS.from_documents(docs, embeddings)
 faiss_index_name = 'faiss_index_incremental'
 docsearch.save_local(faiss_index_name)
 rec_docsearch = FAISS.from_documents(rec_docs, embeddings)
-faiss_index_incremental = FAISS.load_local(rec_docs, embeddings)
+faiss_index_incremental = FAISS.load_local(faiss_index_name, embeddings)
 faiss_index_incremental.merge_from(rec_docsearch)
 faiss_index_incremental.save_local(faiss_index_name)
 expert_docsearch = FAISS.from_documents(expert_docs, embeddings)
