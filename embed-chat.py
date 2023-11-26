@@ -44,6 +44,8 @@ whatif_docs = text_splitter.split_documents(whatif_doc)
 embeddings = OpenAIEmbeddings(openai_api_key=openaikey)
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 docsearch = FAISS.from_documents(docs, embeddings)
+faiss_index_name = 'faiss_index_incremental'
+docsearch.save_local(faiss_index_name)
 rec_docsearch = FAISS.from_documents(rec_docs, embeddings)
 expert_docsearch = FAISS.from_documents(expert_docs, embeddings)
 index1_docsearch = FAISS.from_documents(index1_docs, embeddings)
