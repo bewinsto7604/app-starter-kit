@@ -132,7 +132,7 @@ if query := st.chat_input("Ask me anything"):
             response = result
             print(response)
         else:    
-            result = whatif_qa.run(query)
+            result = qa.run(query)
             response = result
         # result = chain({"question": query})
         # response = result['answer']
