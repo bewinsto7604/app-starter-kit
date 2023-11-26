@@ -42,10 +42,11 @@ embeddings = OpenAIEmbeddings(openai_api_key=openaikey)
 # Embed your documents and combine with the raw text in a pseudo db. Note: This will make an API call to OpenAI
 docsearch = FAISS.from_documents(docs, embeddings)
 llm=OpenAI(temperature=0, openai_api_key=openaikey)
-vector_store = FAISS.load_local("faiss_index", embeddings)
+# vector_store = FAISS.load_local("faiss_index", embeddings)
 retriever = docsearch.as_retriever(search_kwargs={"k": 3})
 qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
-qa.run("What is QTXACHG?")
+result = qa.run("What is QTXACHG?")
+response = result
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
