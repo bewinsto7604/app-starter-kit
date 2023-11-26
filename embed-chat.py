@@ -13,6 +13,6 @@ embeddings = OpenAIEmbeddings()
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 db = FAISS.from_documents(docs, embeddings)
 
-query = "What did the president say about Ketanji Brown Jackson"
+query = "What is QTXACHG?"
 docs = db.similarity_search(query)
 print(docs[0].page_content)
