@@ -28,25 +28,7 @@ agent_executor = create_sql_agent(
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
-from langchain.document_loaders import TextLoader
-from langchain.vectorstores import FAISS
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.chains import RetrievalQA
-loader = TextLoader('padb-domain.txt')
-doc = loader.load()
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=400)
-docs = text_splitter.split_documents(doc)
-num_total_characters = sum([len(x.page_content) for x in docs])
-embeddings = OpenAIEmbeddings(openai_api_key=openaikey)
-# Embed your documents and combine with the raw text in a pseudo db. Note: This will make an API call to OpenAI
-docsearch = FAISS.from_documents(docs, embeddings)
-llm=OpenAI(temperature=0, openai_api_key=openaikey)
-# vector_store = FAISS.load_local("faiss_index", embeddings)
-retriever = docsearch.as_retriever(search_kwargs={"k": 3})
-qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
-result = qa.run("What is QTXACHG?")
-response = result
+
 # Custom image for the app icon and the assistant's avatar
 company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 # Configure Streamlit page
@@ -87,10 +69,8 @@ if query := st.chat_input("Ask me anything"):
             response = result
             print(response)
         else:
-            result = qa.run("What is QTXACHG?")
-            response = result
-            # result = chain({"question": query})
-            # response = result['answer']
+            result = chain({"question": query})
+            response = result['answer']
         # result = chain({"question": query})
         # response = result['answer']
         full_response = ""
