@@ -103,9 +103,8 @@ if query := st.chat_input("Ask me anything"):
             result = agent_executor.run('"' + query + '"')
             response = result
             print(response)
-        else:
-            
-            result = qa.run(query)
+        else:    
+            result = whatif_qa.run(query)
             response = result
         # result = chain({"question": query})
         # response = result['answer']
