@@ -14,6 +14,7 @@ from langchain.agents.agent_types import AgentType
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.sql_database import SQLDatabase
+from langchain.agents import create_sql_agent
 
 username = "dbmasteruser" 
 password = st.secrets["DB_PASSWORD"]
