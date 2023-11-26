@@ -1,4 +1,6 @@
 import streamlit as st
+import getpass
+import os
 from langchain.document_loaders import TextLoader
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
@@ -10,7 +12,7 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 
 embeddings = OpenAIEmbeddings()
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+os.environ["OPENAI_API_KEY"] = = st.secrets["OPENAI_API_KEY"]
 db = FAISS.from_documents(docs, embeddings)
 
 query = "What is QTXACHG?"
