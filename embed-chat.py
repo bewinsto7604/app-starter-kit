@@ -18,6 +18,13 @@ db = FAISS.from_documents(docs, embeddings)
 query = "What is QTXACHG?"
 docs = db.similarity_search(query)
 print(docs[0].page_content)
+# Custom image for the app icon and the assistant's avatar
+company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
+# Configure Streamlit page
+st.set_page_config(
+    page_title="Your Notion Chatbot",
+    page_icon=company_logo
+)
 # Initialize chat history
 if 'messages' not in st.session_state:
     # Start with first message from assistant
