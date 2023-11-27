@@ -126,7 +126,7 @@ st.set_page_config(
 if 'messages' not in st.session_state:
     # Start with first message from assistant
     st.session_state['messages'] = [{"role": "assistant", 
-                                  "content": "Hi human! I am Blendle's smart AI. How can I help you today?"}]
+                                  "content": "Hi human! I am smart AI. How can I help you today?"}]
 # Display chat messages from history on app rerun
 # Custom avatar for the assistant, default avatar for user
 for message in st.session_state.messages:
