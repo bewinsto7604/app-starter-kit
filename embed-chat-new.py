@@ -68,7 +68,7 @@ import streamlit as st
 for msg in msgs.messages:
     st.chat_message(msg.type).write(msg.content)
 if prompt := st.chat_input():
-    # st.chat_message("human").write(prompt)
+    st.chat_message("human").write(prompt)
     st.session_state.messages.append({"role": "human", "content": prompt})
     # response = llm_chain.run(prompt)
     response = agent_executor.run('"' + prompt + '"')
