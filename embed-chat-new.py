@@ -45,12 +45,8 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 msgs = StreamlitChatMessageHistory(key="special_app_key")
 
 memory = ConversationBufferMemory(memory_key="history", chat_memory=msgs)
-# if len(msgs.messages) == 0:
-#    msgs.add_ai_message("How can I help you?")
-if 'messages' not in st.session_state:
-    # Start with first message from assistant
-    st.session_state['messages'] = [{"role": "assistant", 
-                                  "content": "Hi human! I am smart AI. How can I help you today?"}]    
+if len(msgs.messages) == 0:
+   msgs.add_ai_message("How can I help you?")
 
 from langchain.chains import LLMChain
 from langchain.llms import OpenAI
@@ -75,5 +71,5 @@ if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
     # response = llm_chain.run(prompt)
     response = agent_executor.run('"' + prompt + '"')
-    st.session_state.messages.append({"role": "assistant", "content": response}) 
+    st.chat_message(msg.type).write(response)
     # st.chat_message("ai").write(response)
