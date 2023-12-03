@@ -165,7 +165,7 @@ for msg in msgs.messages:
     st.chat_message(msg.type).write(msg.content)
 if prompt := st.chat_input():
     # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.session_state.messages.append({"role": "assistant", "content": prompt})
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -192,4 +192,4 @@ if prompt := st.chat_input():
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
     # Add assistant message to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})            
+    st.session_state.messages.append({"role": "human", "content": response})            
