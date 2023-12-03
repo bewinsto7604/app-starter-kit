@@ -16,7 +16,8 @@ from langchain.chains import LLMChain
 from langchain.sql_database import SQLDatabase
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.agents import create_sql_agent
-from langchain.memory import StreamlitChatMessageHistory
+from langchain.memory import ConversationBufferMemory
+from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 
 username = "dbmasteruser" 
 password = st.secrets["DB_PASSWORD"]
