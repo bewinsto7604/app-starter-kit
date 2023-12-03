@@ -68,26 +68,6 @@ for msg in msgs.messages:
     st.chat_message(msg.type).write(msg.content)
 
 if prompt := st.chat_input():
-    # st.chat_message("human").write(prompt)
+    st.chat_message("human").write(prompt)
     response = agent_executor.run('"' + prompt + '"')
-    # st.chat_message("ai").write(response)
-
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = ""
-        assistant_response = random.choice(
-            [
-                "Hello there! How can I assist you today?",
-                "Hi, human! Is there anything I can help you with?",
-                "Do you need help?",
-            ]
-        )
-        # Simulate stream of response with milliseconds delay
-        for chunk in assistant_response.split():
-            full_response += chunk + " "
-            time.sleep(0.05)
-            # Add a blinking cursor to simulate typing
-            message_placeholder.markdown(full_response + "▌")
-        message_placeholder.markdown(full_response)
-    st.session_state.messages.append({"role": "assistant", "content": full_response})  
+    st.chat_message("ai").write(response)
