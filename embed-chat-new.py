@@ -60,7 +60,7 @@ AI: """
 prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
 
 # Add the memory to an LLMChain as usual
-llm_chain = LLMChain(llm=OpenAI(), prompt=prompt)
+llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
 
 import streamlit as st
 # Display chat messages from history on app rerun
