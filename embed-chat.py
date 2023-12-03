@@ -34,6 +34,14 @@ agent_executor = create_sql_agent(
 )
 
 history = StreamlitChatMessageHistory(key="chat_messages")
+
+history.add_user_message("hi!")
+history.add_ai_message("whats up?")
+
+from langchain.memory import ConversationBufferMemory
+from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
+
+# Optionally, specify your own session_state key for storing messages
 msgs = StreamlitChatMessageHistory(key="special_app_key")
 
 memory = ConversationBufferMemory(memory_key="history", chat_memory=msgs)
