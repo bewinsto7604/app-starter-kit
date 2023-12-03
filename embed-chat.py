@@ -167,29 +167,29 @@ if prompt := st.chat_input():
     # Add user message to chat history
     st.session_state.messages.append({"role": "assistant", "content": prompt})
     # Display user message in chat message container
-    # with st.chat_message("user"):
-    #    st.markdown(prompt)
-    # with st.chat_message("assistant", avatar=company_logo):
-    message_placeholder = st.empty()
-    # Send user's question to our chain
-    response = ""
-    if "POORLY_PERFORMING_SQL" in prompt:
-        print("enter")
-        result = agent_executor.run('"' + prompt + '"')
-        response = result
-        print(response)
-    else:    
-        result = qa.run(prompt)
-        response = result
-    # result = chain({"question": query})
-    # response = result['answer']
-    full_response = ""
-    # Simulate stream of response with milliseconds delay
-    for chunk in response.split():
-        full_response += chunk + " "
-        time.sleep(0.05)
-        # Add a blinking cursor to simulate typing
-        message_placeholder.markdown(full_response + "▌")
-    message_placeholder.markdown(full_response)
-    # Add assistant message to chat history
-    st.session_state.messages.append({"role": "human", "content": response})            
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    with st.chat_message("assistant", avatar=company_logo):
+        message_placeholder = st.empty()
+        # Send user's question to our chain
+        response = ""
+        if "POORLY_PERFORMING_SQL" in prompt:
+            print("enter")
+            result = agent_executor.run('"' + prompt + '"')
+            response = result
+            print(response)
+        else:    
+            result = qa.run(prompt)
+            response = result
+        # result = chain({"question": query})
+        # response = result['answer']
+        full_response = ""
+        # Simulate stream of response with milliseconds delay
+        for chunk in response.split():
+            full_response += chunk + " "
+            time.sleep(0.05)
+            # Add a blinking cursor to simulate typing
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+        # Add assistant message to chat history
+        st.session_state.messages.append({"role": "human", "content": response})            
