@@ -45,8 +45,8 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 msgs = StreamlitChatMessageHistory(key="special_app_key")
 
 memory = ConversationBufferMemory(memory_key="history", chat_memory=msgs)
-if len(msgs.messages) == 0:
-   msgs.add_ai_message("How can I help you?")
+# if len(msgs.messages) == 0:
+#   msgs.add_ai_message("How can I help you?")
 
 template = """You are an AI chatbot having a conversation with a human.
 
