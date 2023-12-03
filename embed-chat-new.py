@@ -148,11 +148,5 @@ for msg in msgs.messages:
 
 if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
-
-    # As usual, new messages are added to StreamlitChatMessageHistory when the Chain is called.
-    if "POORLY_PERFORMING_SQL" in msg.content:
-        db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
-        response = db_chain.run(prompt)
-    else: 
-        response = whatif_qa.run(msg.content)
+    response = llm_chain.run(prompt)
     st.chat_message("ai").write(response)
