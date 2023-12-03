@@ -155,6 +155,4 @@ if prompt := st.chat_input():
         response = db_chain.run(prompt)
     else: 
         response = whatif_qa.run(msg.content)
-        response = result
-        response = llm_chain.run(prompt)
     st.chat_message("ai").write(response)
