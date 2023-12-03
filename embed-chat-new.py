@@ -45,8 +45,12 @@ from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 msgs = StreamlitChatMessageHistory(key="special_app_key")
 
 memory = ConversationBufferMemory(memory_key="history", chat_memory=msgs)
-if len(msgs.messages) == 0:
-    msgs.add_ai_message("How can I help you?")
+# if len(msgs.messages) == 0:
+#    msgs.add_ai_message("How can I help you?")
+if 'messages' not in st.session_state:
+    # Start with first message from assistant
+    st.session_state['messages'] = [{"role": "assistant", 
+                                  "content": "Hi human! I am smart AI. How can I help you today?"}]    
 
 from langchain.chains import LLMChain
 from langchain.llms import OpenAI
@@ -61,10 +65,6 @@ prompt = PromptTemplate(input_variables=["history", "human_input"], template=tem
 
 # Add the memory to an LLMChain as usual
 llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
-if 'messages' not in st.session_state:
-    # Start with first message from assistant
-    st.session_state['messages'] = [{"role": "assistant", 
-                                  "content": "Hi human! I am smart AI. How can I help you today?"}]
     
 import streamlit as st
 # Display chat messages from history on app rerun
