@@ -63,9 +63,20 @@ prompt = PromptTemplate(input_variables=["history", "human_input"], template=tem
 llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
 
 import streamlit as st
-
-for msg in msgs.messages:
-    st.chat_message(msg.type).write(msg.content)
+# Initialize chat history
+if 'messages' not in st.session_state:
+    # Start with first message from assistant
+    st.session_state['messages'] = [{"role": "assistant", 
+                                  "content": "Hi human! I am smart AI. How can I help you today?"}]
+# Display chat messages from history on app rerun
+# Custom avatar for the assistant, default avatar for user
+for message in st.session_state.messages:
+    if message["role"] == 'assistant':
+        with st.chat_message(message["role"], avatar=company_logo):
+            st.markdown(message["content"])
+    else:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
 if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
