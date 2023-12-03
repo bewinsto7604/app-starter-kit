@@ -154,6 +154,8 @@ for message in st.session_state.messages:
             st.markdown(message["content"])
 llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
 # Chat logic
+for msg in msgs.messages:
+    st.chat_message(msg.type).write(msg.content)
 if prompt := st.chat_input():
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
