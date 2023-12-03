@@ -18,7 +18,7 @@ from langchain.sql_database import SQLDatabase
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.agents import create_sql_agent
 import random
-
+company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
 username = "dbmasteruser" 
 password = st.secrets["DB_PASSWORD"]
 host = "ls-33fa4ea7c905e7c94ad71a9651449adfc0d5b2d3.c9pxztxaqz52.us-east-1.rds.amazonaws.com" 
