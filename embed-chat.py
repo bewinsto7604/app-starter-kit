@@ -16,6 +16,7 @@ from langchain.chains import LLMChain
 from langchain.sql_database import SQLDatabase
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.agents import create_sql_agent
+from langchain.memory import StreamlitChatMessageHistory
 
 username = "dbmasteruser" 
 password = st.secrets["DB_PASSWORD"]
@@ -30,6 +31,20 @@ agent_executor = create_sql_agent(
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
+
+history = StreamlitChatMessageHistory(key="chat_messages")
+msgs = StreamlitChatMessageHistory(key="special_app_key")
+
+memory = ConversationBufferMemory(memory_key="history", chat_memory=msgs)
+if len(msgs.messages) == 0:
+   msgs.add_ai_message("How can I help you?")
+
+template = """You are an AI chatbot having a conversation with a human.
+
+{history}
+Human: {human_input}
+AI: """
+prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
 
 openaikey = st.secrets["OPENAI_API_KEY"]
 loader = TextLoader("padb-domain.txt")
@@ -137,23 +152,23 @@ for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 # Chat logic
-if query := st.chat_input("Ask me anything"):
+if prompt := st.chat_input("Ask me anything"):
     # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": query})
+    st.session_state.messages.append({"role": "user", "content": prompt})
     # Display user message in chat message container
     with st.chat_message("user"):
-        st.markdown(query)
+        st.markdown(prompt)
     with st.chat_message("assistant", avatar=company_logo):
         message_placeholder = st.empty()
         # Send user's question to our chain
         response = ""
-        if "POORLY_PERFORMING_SQL" in query:
+        if "POORLY_PERFORMING_SQL" in prompt:
             print("enter")
-            result = agent_executor.run('"' + query + '"')
+            result = agent_executor.run('"' + prompt + '"')
             response = result
             print(response)
         else:    
-            result = qa.run(query)
+            result = qa.run(prompt)
             response = result
         # result = chain({"question": query})
         # response = result['answer']
