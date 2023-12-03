@@ -69,5 +69,6 @@ for msg in msgs.messages:
 
 if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
-    response = agent_executor.run('"' + prompt + '"')
+    response = llm_chain.run(prompt)
+    # response = agent_executor.run('"' + prompt + '"')
     st.chat_message("ai").write(response)
