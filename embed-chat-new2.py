@@ -1,9 +1,12 @@
 import streamlit as st
 import random
 import time
+from langchain.chains import LLMChain
+from langchain.llms import OpenAI
+from langchain.prompts import PromptTemplate
 
 st.title("Simple chat")
-
+llm_chain = LLMChain(llm=OpenAI())
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -25,13 +28,7 @@ if prompt := st.chat_input("What is up?"):
     with st.chat_message("assistant"):
         message_placeholder = st.empty()
         full_response = ""
-        assistant_response = random.choice(
-            [
-                "Hello there! How can I assist you today?",
-                "Hi, human! Is there anything I can help you with?",
-                "Do you need help?",
-            ]
-        )
+        assistant_response = llm_chain.run(prompt)
         # Simulate stream of response with milliseconds delay
         for chunk in assistant_response.split():
             full_response += chunk + " "
