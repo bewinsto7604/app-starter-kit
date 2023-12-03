@@ -167,8 +167,9 @@ if prompt := st.chat_input():
     # Add user message to chat history
     st.session_state.messages.append({"role": "assistant", "content": prompt})
     # Display user message in chat message container
-    # with st.chat_message("user"):
-    #    st.markdown(prompt)
+    with st.chat_message("user"):
+        st.markdown(prompt)
+        st.session_state.messages.append({"role": "human", "content": response})
     with st.chat_message("assistant", avatar=company_logo):
         message_placeholder = st.empty()
         # Send user's question to our chain
