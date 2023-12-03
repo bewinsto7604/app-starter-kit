@@ -169,7 +169,6 @@ if prompt := st.chat_input():
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)
-        st.session_state.messages.append({"role": "user", "content": response})
     with st.chat_message("assistant", avatar=company_logo):
         message_placeholder = st.empty()
         # Send user's question to our chain
@@ -193,4 +192,4 @@ if prompt := st.chat_input():
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
         # Add assistant message to chat history
-        st.session_state.messages.append({"role": "human", "content": response})            
+        st.session_state.messages.append({"role": "user", "content": response})            
