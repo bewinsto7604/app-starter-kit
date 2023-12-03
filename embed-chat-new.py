@@ -151,12 +151,4 @@ if prompt := st.chat_input():
 
     # As usual, new messages are added to StreamlitChatMessageHistory when the Chain is called.
     response = llm_chain.run(prompt)
-    if "POORLY_PERFORMING_SQL" in query:
-        print("enter")
-        result = agent_executor.run('"' + query + '"')
-        response = result
-        print(response)
-    else:    
-        result = qa.run(query)
-        response = result
     st.chat_message("ai").write(response)
