@@ -61,7 +61,11 @@ prompt = PromptTemplate(input_variables=["history", "human_input"], template=tem
 
 # Add the memory to an LLMChain as usual
 llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
-
+if 'messages' not in st.session_state:
+    # Start with first message from assistant
+    st.session_state['messages'] = [{"role": "assistant", 
+                                  "content": "Hi human! I am smart AI. How can I help you today?"}]
+    
 import streamlit as st
 # Display chat messages from history on app rerun
 # Custom avatar for the assistant, default avatar for user
