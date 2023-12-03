@@ -63,6 +63,10 @@ prompt = PromptTemplate(input_variables=["history", "human_input"], template=tem
 llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
 
 import streamlit as st
+if 'messages' not in st.session_state:
+    # Start with first message from assistant
+    st.session_state['messages'] = [{"role": "assistant", 
+                                  "content": "Hi human! I am smart AI. How can I help you today?"}]
 for message in st.session_state.messages:
     if message["role"] == 'assistant':
         with st.chat_message(message["role"], avatar=company_logo):
