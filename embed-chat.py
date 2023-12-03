@@ -169,7 +169,7 @@ if prompt := st.chat_input():
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)
-        st.session_state.messages.append({"role": "human", "content": response})
+        st.session_state.messages.append({"role": "user", "content": response})
     with st.chat_message("assistant", avatar=company_logo):
         message_placeholder = st.empty()
         # Send user's question to our chain
