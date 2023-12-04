@@ -57,7 +57,8 @@ template = """You are an AI chatbot having a conversation with a human.
 # {history}
 Human: {human_input}
 AI: """
-prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
+# prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
+prompt = PromptTemplate(template=template)
 
 # Add the memory to an LLMChain as usual
 # llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
