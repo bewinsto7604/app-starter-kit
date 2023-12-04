@@ -54,7 +54,7 @@ from langchain.prompts import PromptTemplate
 
 template = """You are an AI chatbot having a conversation with a human.
 
-{history}
+# {history}
 Human: {human_input}
 AI: """
 prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
