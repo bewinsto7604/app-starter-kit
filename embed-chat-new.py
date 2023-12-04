@@ -82,5 +82,5 @@ if prompt := st.chat_input():
     # response = llm_chain.run(prompt)
     response = agent_executor.run('"' + prompt + '"')
     st.markdown(response)
-    st.session_state.messages.append({"role": "human", "content": response})
+    #st.session_state.messages.append({"role": "human", "content": response})
     # st.chat_message("ai").write(response)
