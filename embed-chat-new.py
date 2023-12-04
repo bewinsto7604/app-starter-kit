@@ -60,7 +60,7 @@ AI: """
 prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
 
 # Add the memory to an LLMChain as usual
-llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
+# llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
 
 import streamlit as st
 if 'messages' not in st.session_state:
@@ -82,5 +82,5 @@ if prompt := st.chat_input():
     # response = llm_chain.run(prompt)
     response = agent_executor.run('"' + prompt + '"')
     st.markdown(response)
-    #st.session_state.messages.append({"role": "human", "content": response})
+    st.session_state.messages.append({"role": "human", "content": response})
     # st.chat_message("ai").write(response)
