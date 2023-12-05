@@ -173,7 +173,7 @@ if prompt := st.chat_input():
         message_placeholder = st.empty()
         # Send user's question to our chain
         response = ""
-        if "POORLY_PERFORMING_SQL" in prompt:
+        if "Which SQLSTMT" in prompt:
             print("enter")
             result = agent_executor.run('"' + prompt + '"')
             response = result
