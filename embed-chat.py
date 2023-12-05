@@ -175,7 +175,7 @@ if prompt := st.chat_input():
         response = ""
         if "Which SQLSTMT" in prompt:
             print("enter")
-            result = agent_executor.run('"' + prompt + '"')
+            result = agent_executor.run('"' + prompt + ' in POORLY_PERFORMING_SQL"')
             response = result
             print(response)
         else:    
