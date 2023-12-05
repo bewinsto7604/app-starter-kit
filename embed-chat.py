@@ -178,6 +178,11 @@ if prompt := st.chat_input():
             result = agent_executor.run('"' + prompt + ' in POORLY_PERFORMING_SQL"')
             response = result
             print(response)
+        elif "Which SQL" in prompt:
+            print("enter")
+            result = agent_executor.run('"' + prompt + ' in POORLY_PERFORMING_SQL"')
+            response = result
+            print(response)    
         else:    
             result = qa.run(prompt)
             response = result
