@@ -76,7 +76,7 @@ if prompt := st.chat_input():
         message_placeholder = st.empty()
         # Send user's question to our chain
         response = ""
-        if "Show me" in str_prompt:
+        if "Show me" in query2:
             print("enter")
             response = get_completion(query1)
             print(response)
