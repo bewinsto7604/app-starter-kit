@@ -15,7 +15,6 @@ from langchain.memory import ConversationBufferMemory
 import openai
 st.set_page_config(page_title="DB2 Utility assistant", layout="wide")
 openai.api_key = st.secrets["OPENAI_API_KEY"]
-context = output_string # For our LLM Chain
 sidebar()
 
 # template / prompt
