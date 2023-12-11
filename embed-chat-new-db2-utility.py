@@ -8,7 +8,7 @@ import streamlit as st
 import getpass
 import os
 import time
-from langchain.chains.LLMChain
+from langchain.chains import LLMChain
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
 from langchain.memory import ConversationBufferMemory
