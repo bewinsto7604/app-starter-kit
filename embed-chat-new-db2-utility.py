@@ -14,7 +14,6 @@ from langchain.llms import OpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.memory.chat_message_histories import StreamlitChatMessageHistory
 import openai
-st.set_page_config(page_title="DB2 Utility assistant", layout="wide")
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 f = open('zcv1-171494-dba-mapping.json')
