@@ -15,7 +15,6 @@ from langchain.memory import ConversationBufferMemory
 import openai
 st.set_page_config(page_title="DB2 Utility assistant", layout="wide")
 openai.api_key = st.secrets["OPENAI_API_KEY"]
-sidebar()
 
 # template / prompt
 query1 = "When cond_code which is not equal to 0 it denotes a failed job. Show me jobname, utilname, error_reason_cd, error_reason for all failed jobs for event.utilname BMC AMI Reorg for Db2 in the last 2 days."
