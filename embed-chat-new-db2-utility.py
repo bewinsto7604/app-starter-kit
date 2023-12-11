@@ -90,7 +90,7 @@ if prompt := st.chat_input():
         response = ""
         if "Show me" in prompt:
             print("enter")
-            response = get_completion(prompt)
+            response = get_completion(query1)
             print(response)
         elif "Which SQL" in prompt:
             print("enter")
