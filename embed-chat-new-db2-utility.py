@@ -39,7 +39,7 @@ When cond_code which is not equal to 0 it denotes a failed job. Always include j
 Human: {human_input}
 Chatbot:"""
 
-prompt = 'Given the mapping delimited by triple backticks ``` ' + mapping_string + ' ``` translate the text delimited by triple quotes in a valid Elasticsearch DSL query """ ' + query2 + ' """. Give me only the json code part of the answer. Compress the json output removing spaces.'
+str_prompt = 'Given the mapping delimited by triple backticks ``` ' + mapping_string + ' ``` translate the text delimited by triple quotes in a valid Elasticsearch DSL query """ ' + query2 + ' """. Give me only the json code part of the answer. Compress the json output removing spaces.'
 
 def get_completion(prompt, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
@@ -74,7 +74,7 @@ for message in st.session_state.messages:
     else:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
+llm_chain = LLMChain(llm=OpenAI(), prompt=str_prompt, memory=memory)
 # Chat logic
 for msg in msgs.messages:
     st.chat_message(msg.type).write(msg.content)
