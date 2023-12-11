@@ -33,7 +33,7 @@ When cond_code which is not equal to 0 it denotes a failed job. Always include j
 Human: {human_input}
 Chatbot:"""
 
-prompt = 'Given the mapping delimited by triple backticks ``` ' + mapping_string + ' ``` translate the text delimited by triple quotes in a valid Elasticsearch DSL query """ ' + query1 + query2 + ' """. Give me only the json code part of the answer. Compress the json output removing spaces.'
+prompt = 'Given the mapping delimited by triple backticks ``` ' + mapping_string + ' ``` translate the text delimited by triple quotes in a valid Elasticsearch DSL query """ ' + query2 + ' """. Give me only the json code part of the answer. Compress the json output removing spaces.'
 
 f = open('zcv1-171494-dba-mapping.json')
 mapping = json.load(f)
