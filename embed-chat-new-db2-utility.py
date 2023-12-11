@@ -8,9 +8,9 @@ import streamlit as st
 import getpass
 import os
 import time
+from langchain.chains.LLMChain
 from langchain import PromptTemplate
 from langchain.llms import OpenAI
-from langchain import LLMChain
 from langchain.memory import ConversationBufferMemory
 import openai
 st.set_page_config(page_title="DB2 Utility assistant", layout="wide")
