@@ -3,3 +3,5 @@ If your SQL statement has a getpage count that is high and has been increasing o
 (2)	The catalog statistics for the table(s) referenced by the FROM clause may be inaccurate, leading to an incorrect access path. To investigate whether this is the case, compare the tables’ CARDF value in the Db2 catalog table SYSIBM.SYSTABLES to the actual number of rows in the table(s).
 (3)	If the SQL statement is statically bound, rebind the package after taking either of the above actions.
 BMC Software provides a Workload Index Advisor and a Workload Statistics Advisor to look for such conditions on a proactive basis.
+
+The command to create the index is "CREATE INDEX NEWIDX ON PSSF70F5.CUSTOMERS (CUSTID, LAST)".'
