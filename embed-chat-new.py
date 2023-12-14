@@ -164,7 +164,7 @@ if prompt := st.chat_input():
             response = result
             print(response)             
         else:    
-            result = whatif_qa.run(prompt)
+            result = expert_qa.run(prompt)
             response = result
         # result = chain({"question": query})
         # response = result['answer']
