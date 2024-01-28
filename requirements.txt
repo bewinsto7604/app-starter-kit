@@ -8,3 +8,4 @@ openai==0.28.1
 faiss-gpu
 tiktoken==0.3.1
 psycopg2
+psycopg2-binary
