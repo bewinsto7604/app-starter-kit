@@ -1,7 +1,7 @@
 streamlit
 faiss-cpu
 hugchat==0.0.8
-langchain==0.0.329
+langchain==0.0.168
 langchain-experimental==0.0.37
 mysql-connector-python==8.2.0
 openai==0.28.1
