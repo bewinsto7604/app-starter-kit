@@ -111,3 +111,23 @@ explain_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=
 whatif_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=whatif_docsearch.as_retriever())
 query = "What is QTXACHG?"
 qa.run(query)
+# Custom image for the app icon and the assistant's avatar
+company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
+# Configure Streamlit page
+st.set_page_config(
+    page_title="Your Notion Chatbot",
+    page_icon=company_logo
+)
+if 'messages' not in st.session_state:
+    # Start with first message from assistant
+    st.session_state['messages'] = [{"role": "assistant", 
+                                  "content": "Hi human! I am BMC Apptune statistics utility assistant for DB2. How can I help you today?"}]
+# Display chat messages from history on app rerun
+# Custom avatar for the assistant, default avatar for user
+for message in st.session_state.messages:
+    if message["role"] == 'assistant':
+        with st.chat_message(message["role"], avatar=company_logo):
+            st.markdown(message["content"])
+    else:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
