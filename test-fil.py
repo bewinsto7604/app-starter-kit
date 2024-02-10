@@ -100,3 +100,4 @@ whatif_docsearch = FAISS.from_documents(whatif_docs, embeddings)
 rec_docsearch.save_local("faiss_padb_index")
 
 llm=OpenAI(temperature=0, openai_api_key=openaikey)
+qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
