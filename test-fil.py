@@ -109,3 +109,5 @@ index3_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=i
 index4_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=index4_docsearch.as_retriever())
 explain_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=explain_docsearch.as_retriever())
 whatif_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=whatif_docsearch.as_retriever())
+query = "What is QTXACHG?"
+qa.run(query)
