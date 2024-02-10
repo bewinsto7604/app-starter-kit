@@ -120,16 +120,3 @@ st.set_page_config(
     page_title="Your Notion Chatbot",
     page_icon=company_logo
 )
-if 'messages' not in st.session_state:
-    # Start with first message from assistant
-    st.session_state['messages'] = [{"role": "assistant", 
-                                  "content": "Hi human! I am BMC Apptune statistics utility assistant for DB2. How can I help you today?"}]
-# Display chat messages from history on app rerun
-# Custom avatar for the assistant, default avatar for user
-for message in st.session_state.messages:
-    if message["role"] == 'assistant':
-        with st.chat_message(message["role"], avatar=company_logo):
-            st.markdown(message["content"])
-    else:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
