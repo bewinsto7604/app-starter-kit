@@ -112,11 +112,3 @@ index4_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=i
 explain_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=explain_docsearch.as_retriever())
 whatif_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=whatif_docsearch.as_retriever())
 query = "What is QTXACHG?"
-qa.run(query)
-# Custom image for the app icon and the assistant's avatar
-company_logo = 'https://www.app.nl/wp-content/uploads/2019/01/Blendle.png'
-# Configure Streamlit page
-st.set_page_config(
-    page_title="Your Notion Chatbot",
-    page_icon=company_logo
-)
