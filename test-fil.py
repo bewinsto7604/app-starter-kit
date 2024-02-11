@@ -133,7 +133,7 @@ for message in st.session_state.messages:
     else:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-llm_chain = LLMChain(llm=OpenAI(model_name="gpt-4"), prompt=prompt, memory=memory)
+llm_chain = LLMChain(llm=OpenAI(model_name="gpt-4-0125-preview"), prompt=prompt, memory=memory)
 # Chat logic
 for msg in msgs.messages:
     st.chat_message(msg.type).write(msg.content)
