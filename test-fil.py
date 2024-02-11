@@ -28,8 +28,8 @@ mydatabase = "BASELINE_STMT_STATISTICS"
 mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydatabase}"
 db = SQLDatabase.from_uri(mysql_uri)
 agent_executor = create_sql_agent(
-    llm=OpenAI(temperature=0, model="gpt-3.5-turbo-instruct"),
-    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0, model="gpt-3.5-turbo-instruct")),
+    llm=OpenAI(temperature=0, model="text-davinci-002"),
+    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0, model="text-davinci-002")),
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
@@ -101,7 +101,7 @@ whatif_docsearch = FAISS.from_documents(whatif_docs, embeddings)
 rec_docsearch.save_local("faiss_padb_index")
 
 # llm=OpenAI(temperature=0, openai_api_key=openaikey, model="gpt-4")
-llm = ChatOpenAI(model_name='gpt-3.5-turbo-instruct')
+llm = ChatOpenAI(model_name='text-davinci-002')
 qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
 rec_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=rec_docsearch.as_retriever())
 expert_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=expert_docsearch.as_retriever())
@@ -133,7 +133,7 @@ for message in st.session_state.messages:
     else:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-llm_chain = LLMChain(llm=OpenAI(model_name="gpt-3.5-turbo-instruct"), prompt=prompt, memory=memory)
+llm_chain = LLMChain(llm=OpenAI(model_name="text-davinci-002"), prompt=prompt, memory=memory)
 # Chat logic
 for msg in msgs.messages:
     st.chat_message(msg.type).write(msg.content)
