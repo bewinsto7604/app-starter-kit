@@ -87,7 +87,7 @@ index4_docs = text_splitter.split_documents(index4_doc)
 explain_docs = text_splitter.split_documents(explain_doc)
 whatif_docs = text_splitter.split_documents(whatif_doc)
 
-embeddings = OpenAIEmbeddings(openai_api_key=openaikey, model="gpt-3.5-turbo-instruct")
+embeddings = OpenAIEmbeddings(openai_api_key=openaikey, model="text-embedding-ada-002")
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 docsearch = FAISS.from_documents(docs, embeddings)
 rec_docsearch = FAISS.from_documents(rec_docs, embeddings)
