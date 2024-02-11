@@ -101,7 +101,7 @@ whatif_docsearch = FAISS.from_documents(whatif_docs, embeddings)
 rec_docsearch.save_local("faiss_padb_index")
 
 # llm=OpenAI(temperature=0, openai_api_key=openaikey, model="gpt-4")
-llm = ChatOpenAI(model_name='gpt-4')
+llm = ChatOpenAI(model_name='gpt-4-0125-preview')
 qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
 rec_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=rec_docsearch.as_retriever())
 expert_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=expert_docsearch.as_retriever())
