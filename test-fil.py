@@ -28,8 +28,8 @@ mydatabase = "BASELINE_STMT_STATISTICS"
 mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydatabase}"
 db = SQLDatabase.from_uri(mysql_uri)
 agent_executor = create_sql_agent(
-    llm=OpenAI(temperature=0),
-    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0)),
+    llm=OpenAI(temperature=0, model="gpt-4"),
+    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0, model="gpt-4")),
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
