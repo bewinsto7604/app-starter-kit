@@ -27,8 +27,8 @@ mydatabase = "BASELINE_STMT_STATISTICS"
 mysql_uri = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{mydatabase}"
 db = SQLDatabase.from_uri(mysql_uri)
 agent_executor = create_sql_agent(
-    llm=OpenAI(temperature=0),
-    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0)),
+    llm=OpenAI(temperature=0, model="gpt-3.5-turbo-instruct"),
+    toolkit=SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0, model="gpt-3.5-turbo-instruct")),
     verbose=True,
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
@@ -86,7 +86,7 @@ index4_docs = text_splitter.split_documents(index4_doc)
 explain_docs = text_splitter.split_documents(explain_doc)
 whatif_docs = text_splitter.split_documents(whatif_doc)
 
-embeddings = OpenAIEmbeddings(openai_api_key=openaikey)
+embeddings = OpenAIEmbeddings(openai_api_key=openaikey, model="text-embedding-ada-002")
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 docsearch = FAISS.from_documents(docs, embeddings)
 rec_docsearch = FAISS.from_documents(rec_docs, embeddings)
@@ -99,9 +99,10 @@ explain_docsearch = FAISS.from_documents(explain_docs, embeddings)
 whatif_docsearch = FAISS.from_documents(whatif_docs, embeddings)
 rec_docsearch.save_local("faiss_padb_index")
 
-llm=OpenAI(temperature=0, openai_api_key=openaikey)
+# llm=OpenAI(temperature=0, openai_api_key=openaikey)
 # faiss_vector_index = FAISS.load_local(faiss_index_name, embeddings)
 # retriever = faiss_vector_index.as_retriever(search_kwargs={"k": 4})
+llm = ChatOpenAI(model_name='gpt-3.5-turbo-0613')
 qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docsearch.as_retriever())
 rec_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=rec_docsearch.as_retriever())
 expert_qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=expert_docsearch.as_retriever())
@@ -134,7 +135,7 @@ for message in st.session_state.messages:
     else:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
-llm_chain = LLMChain(llm=OpenAI(), prompt=prompt, memory=memory)
+llm_chain = LLMChain(llm=OpenAI(model_name="gpt-3.5-turbo-instruct"), prompt=prompt, memory=memory)
 # Chat logic
 for msg in msgs.messages:
     st.chat_message(msg.type).write(msg.content)
